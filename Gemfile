@@ -29,6 +29,28 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 
+# Add testing for rails and dev
+group :development, :test do
+  gem 'factory_girl_rails'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'rspec-rails'
+end
+
+#Javascript testing
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'faker'
+  gem 'launchy'
+  gem 'poltergeist'
+  gem 'shoulda-matchers'
+end
+
+# For heroku
+group :production do
+  gem 'rails_12factor'
+end
 
 
 # Use ActiveModel has_secure_password
