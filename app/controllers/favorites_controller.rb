@@ -11,4 +11,10 @@ class FavoritesController < ApplicationController
     @user.favorites << @favorited_user
   end
 
+  private
+
+  def favorite_params
+    params.require(:favorite).permit(:user_1, :user_1, :liked_back, :id)
+  end
+
 end
