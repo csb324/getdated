@@ -6,10 +6,24 @@
         -current_user.errors.full_messages.each do |msg|
           = msg
     .form-group
+      = f.label :display_name
+      .controls
+      = f.text_field :display_name, value: current_user.display_name, placeholder: 'What would you like to be called?', required: ''
       = f.label :email
       .controls
-      = f.text_field :email, :value => current_user.email
-      %p.help-block Please provide your email address
+      = f.email_field :email, value: current_user.email, placeholder: 'Please provide an Email!', required: ''
+      = f.label :age
+      .controls
+      = f.text_field :age, value: current_user.age, min: '18', max:'100', required: ''
+      = f.label :gender
+      .controls
+      = f.select :gender, [['Female','female'], ['Male', 'male']]
+      = f.label :interested_in
+      .controls
+      = f.select :interested_in, [['Male', 'male'], ['Female','female']]
+      = f.label :bio
+      .controls
+      = f.text_area :bio, value: current_user.bio, placeholder:'Tell us about yourself! ', required: ''
     .actions
       = f.submit 'continue'
 
