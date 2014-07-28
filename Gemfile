@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 
+gem 'dotenv-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
 # Use postgresql as the database for Active Record
@@ -17,6 +18,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # Spotify gems
 gem 'rspotify'
 gem 'omniauth-spotify'
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

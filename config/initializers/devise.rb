@@ -18,7 +18,7 @@ Devise.setup do |config|
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
-  # available as additional gems.
+  # available as additional gems
   require 'devise/orm/active_record'
 
   # ==> Configuration for any authentication mechanism
@@ -137,7 +137,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 8..128
+  config.password_length = 6..128
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
@@ -230,6 +230,11 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :spotify,
+    ENV['SPOTIFY_ID'],
+    ENV['SPOTIFY_SECRET'],
+    scope: 'playlist-read-private user-library-read user-read-private'
+
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
