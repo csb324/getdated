@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20140728200843) do
     t.string   "gender"
     t.string   "interested_in"
     t.string   "display_name"
+    t.string   "location"
     t.string   "bio"
   end
 

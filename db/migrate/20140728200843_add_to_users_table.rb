@@ -5,6 +5,7 @@ class AddToUsersTable < ActiveRecord::Migration
       t.string :gender, index:true
       t.string :interested_in, index:true
       t.string :display_name, index:true
+      t.string :location, index:true
       t.string :bio
     end
   end

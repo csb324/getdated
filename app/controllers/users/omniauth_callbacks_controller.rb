@@ -16,7 +16,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def after_sign_in_path_for(user)
-    if user.email != 'temp@gmail.com'
+    if user.location?
       super user
     else
       finish_signup_path(user)
