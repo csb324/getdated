@@ -1,9 +1,9 @@
 class FavoritesController < ApplicationController
-  before_action :authenticate_user! only: [:new, :create]
+  before_action :authenticate_user!
 
   def index
     # favourited users associated with current user
-    @favorites = @user.favorites
+    @favorites = current_user.favorites
   end
 
   def create
