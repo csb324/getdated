@@ -59,7 +59,9 @@ group :production do
 end
 
 gem 'devise'
+
 gem 'haml-rails'
+gem 'html2haml'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
