@@ -35,6 +35,9 @@ gem 'spring',        group: :development
 # Access Rails routes in JavaScript
 gem 'js-routes'
 
+# Active Model Serializer
+gem 'active_model_serializers'
+
 # Add testing for rails and dev
 group :development, :test do
   gem 'factory_girl_rails'
