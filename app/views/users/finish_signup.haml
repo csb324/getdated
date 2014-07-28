@@ -1,0 +1,15 @@
+#add-email
+  %h1 Add your email address
+  = form_for(current_user, :as => 'user', :url => finish_signup_path(current_user), :html => { role: 'form'}) do |f|
+    -if @show_errors && current_user.errors.any?
+      .error-explanation
+        -current_user.errors.full_messages.each do |msg|
+          = msg
+    .form-group
+      = f.label :email
+      .controls
+      = f.text_field :email, :value => current_user.email
+      %p.help-block Please provide your email address
+    .actions
+      = f.submit 'continue'
+

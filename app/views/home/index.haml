@@ -1,3 +1,6 @@
 %h1 It Works!!!!
-%h3= link_to "sign in", user_omniauth_authorize_path(:spotify)
-
+-if user_signed_in?
+  %h3 you are user #{current_user.name || current_user}
+  %h3= link_to "sign out", destroy_user_session_path, method: :delete
+-else
+  %h3= link_to "sign in", user_omniauth_authorize_path(:spotify)
