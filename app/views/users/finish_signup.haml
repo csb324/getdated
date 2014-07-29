@@ -11,7 +11,7 @@
       = f.text_field :display_name, value: current_user.display_name, placeholder: 'What would you like to be called?', required: ''
       = f.label :email
       .controls
-      = f.email_field :email, value: current_user.email, placeholder: 'Please provide an Email!', required: ''
+      = f.email_field :email, value: current_user.email, placeholder: 'Please provide an Email!', required: '', id:'email-input'
       = f.label :age
       .controls
       = f.text_field :age, value: current_user.age, min: '18', max:'100', required: ''

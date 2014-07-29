@@ -1,5 +1,5 @@
 .row
-  .large-1.columns
+  .large-2.columns
   .large-10.columns
     -if user_signed_in?
       %img{src: @user.image}
@@ -8,3 +8,4 @@
       %p I'm #{@user.gender.capitalize} and I'm looking for #{@user.interested_in.capitalize}
       %p I live closest to #{@user.location}
       %p A little about me... #{@user.bio}
+
