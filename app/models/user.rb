@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   :recoverable, :rememberable, :trackable, :validatable,
   :omniauthable, :omniauth_providers => [:spotify]
   validates :email, uniqueness: true
+  validates :display_name, uniqueness:true
 
   CITIES = [['Atlanta, GA', 'atlanta'], ['Boston, MA', 'boston'],['Denver, CO','denver'],
    ['Las Vegas, NV','lasvegas'],['Los Angeles, CA','losangeles'],
