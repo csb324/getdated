@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   has_many :tracks, dependent: :destroy
   has_many :artists, through: :tracks
+  has_many :genres, through: :artists
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
