@@ -15,7 +15,6 @@ class Track < ActiveRecord::Base
 
     # playlists_hash['items'] is an array of playlists
     playlists_hash['items'].each do |playlist|
-      puts playlist['name']
       if playlist['owner']['id'] == current_user.uid
         tracks_json_string = RestClient::Request.execute(
           :method => :get,

@@ -15,13 +15,18 @@ class Matcher
   end
 
   def shared_artists
+    @user1.artists & @user2.artists
   end
 
   def artist_count
+    shared_artists.length
   end
 
   def shared_genres
+    @user1.genres & @user2.genres
   end
+
+
 
 end
 
