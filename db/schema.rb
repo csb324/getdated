@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140728200843) do
+=======
+ActiveRecord::Schema.define(version: 20140729153755) do
+>>>>>>> SaveSongData
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +38,14 @@ ActiveRecord::Schema.define(version: 20140728200843) do
 
   add_index "messages", ["favorite_id"], name: "index_messages_on_favorite_id", using: :btree
   add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
+
+  create_table "tracks", force: true do |t|
+    t.string  "spotify_id"
+    t.string  "name"
+    t.integer "user_id"
+  end
+
+  add_index "tracks", ["spotify_id"], name: "index_tracks_on_spotify_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
