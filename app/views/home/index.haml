@@ -1,6 +1,17 @@
-%h1 It Works!!!!
--if user_signed_in?
-  %h3 you are user #{current_user.display_name || current_user}
-  %h3= link_to "sign out", destroy_user_session_path, method: :delete
--else
-  %h3= link_to "sign in", user_omniauth_authorize_path(:spotify)
+.row
+  .large-2.columns
+  .large-8.columns
+    %h1 Get Dated Upon!
+    -if !user_signed_in?
+      %h3= link_to "sign in", user_omniauth_authorize_path(:spotify)
+    -else
+      %h5= link_to "sign out", destroy_user_session_path, method: :delete
+.row
+  .large-1.columns
+  .large-10.columns
+    -if user_signed_in?
+      %h4 I am #{current_user.display_name || current_user}
+      %p I'm #{current_user.age} years old
+      %p I'm #{current_user.gender.capitalize} and I'm looking for #{current_user.interested_in.capitalize}
+      %p I live closest to #{current_user.location}
+      %p A little about me... #{current_user.bio}
