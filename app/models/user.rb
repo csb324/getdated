@@ -33,6 +33,22 @@ class User < ActiveRecord::Base
     end
   end
 
+  def artists_with_frequencies
+    frequencies = Hash.new(0)
+    artists.each do |artist|
+      frequencies[artist] += 1
+    end
+    frequencies
+  end
+
+  def genres_with_frequencies
+    frequencies = Hash.new(0)
+    genres.each do |genre|
+      frequencies[genre] += 1
+    end
+    frequencies
+  end
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.spotify_data"] && session["devise.spotify_data"]["extra"]["raw_info"]

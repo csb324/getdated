@@ -1,1 +1,6 @@
-DOING RIGHT NOW: making a serializer
+DOING RIGHT NOW: making an artist
+
+
+clara = User.find(64)
+eric = User.find(66)
+match = Matcher.new(clara, eric)
