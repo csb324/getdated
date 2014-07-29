@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
    ['Seattle, WA', 'seattle'],['Washington, D.C.','washington']]
 
   has_many :tracks, dependent: :destroy
+  has_many :artists, through: :tracks
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|

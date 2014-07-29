@@ -10,12 +10,17 @@ class Matcher
     user1_track_ids & user2_track_ids
   end
 
-  def tracks_in_common
+  def tracks_count
     shared_tracks.length
   end
 
   def shared_artists
+  end
 
+  def artist_count
+  end
+
+  def shared_genres
   end
 
 end

@@ -11,14 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20140728200843) do
-=======
-ActiveRecord::Schema.define(version: 20140729153755) do
->>>>>>> SaveSongData
+ActiveRecord::Schema.define(version: 20140729204237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "artists", force: true do |t|
+    t.string "name"
+    t.string "spotify_id"
+  end
+
+  create_table "artists_genres", id: false, force: true do |t|
+    t.integer "artist_id", null: false
+    t.integer "genre_id",  null: false
+  end
 
   create_table "favorites", force: true do |t|
     t.integer  "user_1"
@@ -26,6 +32,10 @@ ActiveRecord::Schema.define(version: 20140729153755) do
     t.boolean  "liked_back"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "genres", force: true do |t|
+    t.string "name"
   end
 
   create_table "messages", force: true do |t|
@@ -43,6 +53,7 @@ ActiveRecord::Schema.define(version: 20140729153755) do
     t.string  "spotify_id"
     t.string  "name"
     t.integer "user_id"
+    t.integer "artist_id"
   end
 
   add_index "tracks", ["spotify_id"], name: "index_tracks_on_spotify_id", using: :btree
