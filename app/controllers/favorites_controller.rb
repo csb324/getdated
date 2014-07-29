@@ -7,8 +7,8 @@ class FavoritesController < ApplicationController
   end
 
   def create
-    @favorited_user = current_user.favorites.create(params[:user_id])
-    @user.favorites << @favorited_user
+    # @favorited_user = current_user.favorites.create(params[:user_id])
+    # @user.favorites << @favorited_user
   end
 
   private

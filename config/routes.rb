@@ -6,4 +6,10 @@ Rails.application.routes.draw do
   resources :members, :controller => 'users'
   match '/users/:id/finish_signup' => 'users#finish_signup', via: [:get, :patch], :as => :finish_signup
 
+  resources :favorites, only: [:index, :create, :destroy]
+
+  resources :messages, only: [:show, :index, :create, :destroy]
+
+  resources :users, only: [:show]
+
 end

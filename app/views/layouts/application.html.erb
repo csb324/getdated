@@ -12,6 +12,23 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="contain-to-grid sticky">
+  <nav class="top-bar" data-topbar data-options="sticky_on: large">
+    <ul class='title-area'>
+      <li class='name'>
+        <h1><%= link_to 'Beatz', root_path %></h1>
+      </li>
+    </ul>
+    <% if user_signed_in? %>
+    <ul class='right'>
+      <div id='mah-profile'>
+        <li id='my-profile'><%= link_to 'My Profile', user_path(current_user) %></li>
+      </div>
+    </ul>
+    <%end%>
+  </nav>
+</div>
+
 
 <%= yield %>
 
