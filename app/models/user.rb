@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
    ['San Francisco, CA', 'sanfrancisco'],['San Diego, CA', 'sandiego'],
    ['Seattle, WA', 'seattle'],['Washington, D.C.','washington']]
 
+  has_many :tracks, dependent: :destroy
+
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       user.email = auth['info']['email'] || "example@example.com"
