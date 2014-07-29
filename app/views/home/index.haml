@@ -7,7 +7,7 @@
     -else
       %h5= link_to "sign out", destroy_user_session_path, method: :delete
 
-.row
+.row#show-all-users
   .large-1.columns
   .large-10.columns
     -if user_signed_in?
