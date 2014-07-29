@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :favorites, only: [:index, :create, :destroy]
 
-  resources :messages, only: [:show, :index, :create, :destroy]
+  resources :messages, only: [:show, :index,:new, :create, :destroy]
 
   resources :users, only: [:show]
 

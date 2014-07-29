@@ -9,6 +9,14 @@ class MessagesController < ApplicationController
     # only show for current user
   end
 
+  def new
+
+  end
+
+  def create
+
+  end
+
   def update
     # Ajax calls
     # - when user submits

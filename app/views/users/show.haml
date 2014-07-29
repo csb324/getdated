@@ -3,6 +3,9 @@
   .large-10.columns
     -if user_signed_in?
       %img{src: @user.image}
+      = form_tag(favorites_path, method: 'post') do
+        = hidden_field(:user_2_id,@user.id)
+        = submit_tag "favorite", class: 'button'
       %h4 I am #{@user.display_name || @user}
       %p I'm #{@user.age} years old
       %p I'm #{@user.gender.capitalize} and I'm looking for #{@user.interested_in.capitalize}
