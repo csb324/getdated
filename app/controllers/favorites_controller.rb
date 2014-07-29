@@ -19,6 +19,7 @@ class FavoritesController < ApplicationController
     else
       redirect_to :back
     end
+
   end
 
   private
