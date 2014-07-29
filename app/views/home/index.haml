@@ -10,6 +10,7 @@
   .large-1.columns
   .large-10.columns
     -if user_signed_in?
+      %img{src: current_user.image}
       %h4 I am #{current_user.display_name || current_user}
       %p I'm #{current_user.age} years old
       %p I'm #{current_user.gender.capitalize} and I'm looking for #{current_user.interested_in.capitalize}

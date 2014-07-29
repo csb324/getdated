@@ -13,11 +13,12 @@ class User < ActiveRecord::Base
    ['Seattle, WA', 'seattle'],['Washington, D.C.','washington']]
 
   def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_create do |user|
+    where(auth.slice(:provider, :uid, :image)).first_or_create do |user|
       user.email = auth['info']['email'] || "example@example.com"
       user.password = Devise.friendly_token[0,20]
       user.name = auth.info.name # assuming the user model has a name
       user.uid = auth.uid
+      user.image = auth.image
       user.provider = auth.provider
     end
   end
