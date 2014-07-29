@@ -14,7 +14,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def after_sign_in_path_for(user)
     if user.email != "temp@gmail"
-      Track.refresh(request.env['omniauth.auth']['credentials']['token'], user)
+      Track.refresh(request.env['omniauth.auth']['credentials'], user)
       super user
     else
       finish_signup_path(user)

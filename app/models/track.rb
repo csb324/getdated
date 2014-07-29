@@ -2,17 +2,14 @@ class Track < ActiveRecord::Base
 
   belongs_to :user
 
-  def create
-    @track = Track.new(track_params)
-  end
-
   def self.refresh(credentials, current_user)
-    @auth_token = "Bearer #{credentials}"
+    current_user.tracks.destroy_all
+    @auth_token = "Bearer #{credentials.token}"
     playlists_json_string = RestClient::Request.execute(
       :method => :get,
       :url => "https://api.spotify.com/v1/users/#{current_user.uid}/playlists",
       :headers => {'Authorization' => @auth_token}
-      )
+    )
     playlists_hash = JSON.parse playlists_json_string
 
     # playlists_hash['items'] is an array of playlists
@@ -30,7 +27,7 @@ class Track < ActiveRecord::Base
         if tracks_hash['items'].empty? == false
           tracks_hash['items'].each do |track|
             @newtrack = Track.new
-            @newtrack.id = track['track']['id']
+            @newtrack.spotify_id = track['track']['id']
             @newtrack.name = track['track']['name']
             @newtrack.user = @user
             @newtrack.save!
@@ -38,13 +35,6 @@ class Track < ActiveRecord::Base
         end
       end
     end
-
-  end
-
-  private
-
-  def track_params
-    params.require(:track).permit(:name, :id)
   end
 
 end
