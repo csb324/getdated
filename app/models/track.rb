@@ -4,15 +4,13 @@ class Track < ActiveRecord::Base
 
   def create
     @track = Track.new(track_params)
-    myface = @track
-
   end
 
-  def self.refresh(oauth)
-    @auth_token = "Bearer #{oauth.credentials.token}"
+  def self.refresh(credentials, current_user)
+    @auth_token = "Bearer #{credentials}"
     playlists_json_string = RestClient::Request.execute(
       :method => :get,
-      :url => "https://api.spotify.com/v1/users/#{oauth.uid}/playlists",
+      :url => "https://api.spotify.com/v1/users/#{current_user.uid}/playlists",
       :headers => {'Authorization' => @auth_token}
       )
     playlists_hash = JSON.parse playlists_json_string
@@ -20,7 +18,7 @@ class Track < ActiveRecord::Base
     # playlists_hash['items'] is an array of playlists
     playlists_hash['items'].each do |playlist|
       puts playlist['name']
-      if playlist['owner']['id'] == oauth.uid
+      if playlist['owner']['id'] == current_user.uid
         tracks_json_string = RestClient::Request.execute(
           :method => :get,
           :url => playlist['tracks']['href'],
@@ -28,7 +26,7 @@ class Track < ActiveRecord::Base
           )
         tracks_hash = JSON.parse tracks_json_string
 
-        @user = User.find_by(uid: oauth.uid)
+        @user = User.find_by(uid: current_user.uid)
         if tracks_hash['items'].empty? == false
           tracks_hash['items'].each do |track|
             @newtrack = Track.new
