@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable,
   :omniauthable, :omniauth_providers => [:spotify]
@@ -14,7 +13,7 @@ class User < ActiveRecord::Base
    ['San Francisco, CA', 'sanfrancisco'],['San Diego, CA', 'sandiego'],
    ['Seattle, WA', 'seattle'],['Washington, D.C.','washington']]
 
-  has_many :tracks, dependent: :destroy
+  has_many :tracks
   has_many :artists, through: :tracks
   has_many :genres, through: :artists
 
@@ -33,8 +32,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  ## JUST DID THIS!!!!
-
   def frequencies_of(option)
     frequencies = Hash.new(0)
     if option == :artists
@@ -51,22 +48,6 @@ class User < ActiveRecord::Base
       puts "enter :artists or :genres plz"
     end
   end
-
-  # def artists_with_frequencies
-  #   frequencies = Hash.new(0)
-  #   artists.each do |artist|
-  #     frequencies[artist] += 1
-  #   end
-  #   frequencies
-  # end
-
-  # def genres_with_frequencies
-  #   frequencies = Hash.new(0)
-  #   genres.each do |genre|
-  #     frequencies[genre] += 1
-  #   end
-  #   frequencies
-  # end
 
   def self.new_with_session(params, session)
     super.tap do |user|

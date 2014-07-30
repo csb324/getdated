@@ -1,6 +1,3 @@
-DOING RIGHT NOW: making an artist
+DOING RIGHT NOW: on login, redirect to a nice little loading-screen
 
-
-clara = User.find(64)
-eric = User.find(66)
-match = Matcher.new(clara, eric)
+TOMORROW: make users-and-tracks many-to-many relationship
