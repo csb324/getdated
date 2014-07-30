@@ -1,6 +1,6 @@
 .row
   .large-10.columns.large-centered
-    %h1 See your Matches! You ugly fucking cunts!
+    %h1 See your Matches!
     -if !user_signed_in?
       %h3= link_to "sign in", user_omniauth_authorize_url(:spotify), id: "sign-in-link"
     -else
