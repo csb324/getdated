@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable,
   :omniauthable, :omniauth_providers => [:spotify]
+
   validates :email, uniqueness: true
   validates :display_name, uniqueness:true
 
@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
 
   has_many :tracks, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :artists, through: :tracks
+  has_many :genres, through: :artists
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
@@ -29,6 +31,23 @@ class User < ActiveRecord::Base
       user.uid = auth.uid
       user.image = auth['info']['image']
       user.provider = auth.provider
+    end
+  end
+
+  def frequencies_of(option)
+    frequencies = Hash.new(0)
+    if option == :artists
+      artists.each do |artist|
+        frequencies[artist] += 1
+      end
+      frequencies
+    elsif option == :genres
+      genres.each do |genre|
+        frequencies[genre] += 1
+      end
+      frequencies
+    else
+      puts "enter :artists or :genres plz"
     end
   end
 
