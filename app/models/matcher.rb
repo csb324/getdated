@@ -42,6 +42,13 @@ class Matcher
     shared_by_frequency(option)[0...limit]
   end
 
+  def score
+    track_similarity = tracks_count / (((@user1.tracks.count + @user2.tracks.count) - tracks_count) * 1.0)
+    artist_similarity = shared_count(:artists) / (((@user1.artists.uniq.count + @user2.artists.uniq.count) - shared_count(:artists)) * 1.0)
+    genre_similarity = shared_count(:genres) / (((@user1.genres.uniq.count + @user2.genres.uniq.count) - shared_count(:genres)) * 1.0)
+    (track_similarity * 4) + (artist_similarity * 2) + (genre_similarity * 1)
+  end
+
 end
 
 
