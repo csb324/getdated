@@ -23,7 +23,7 @@ class FavoritesController < ApplicationController
     # @favorite.user_2 = fav_target
 
     if @favorite.save
-      redirect_to user_path(@target)
+      redirect_to user_path(@target), notice: "You did the thing!"
     else
       redirect_to user_path(@target), notice: "that didn't work for some reason"
     end
