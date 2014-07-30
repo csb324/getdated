@@ -1,4 +1,20 @@
 .row
-  .small-2.large-4.columns ...
-  .small-4.large-4.columns ...
-  .small-6.large-4.columns ...
+  .small-3.large-3.columns
+    %img{src:current_user.image}
+  .small-6.large-6.columns
+    %h1 Message your matches!
+    %table
+      - @messages.each do |msg|
+        %tr
+          %td
+            %h5= msg.msg
+            sent by- #{User.find(msg.user_id).display_name}
+            = time_ago_in_words(msg.created_at)
+            ago
+    = form_for [Message.new] do |f|
+      = f.hidden_field :favorite_id, value: @favorite.id
+      = f.label :msg
+      = f.text_field :msg
+      = f.submit
+  .small-3.large-3.columns
+    %img{src:@favorite.other_user(current_user).image}

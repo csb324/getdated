@@ -15,7 +15,8 @@ class FavoritesController < ApplicationController
   end
 
   def show
-    @favorite = Favorite.find_by(params[:id])
+    @favorite = Favorite.find(params[:id])
+    @messages = Message.where(favorite_id: @favorite.id)
   end
 
   def create
