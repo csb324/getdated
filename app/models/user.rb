@@ -46,6 +46,11 @@ class User < ActiveRecord::Base
         frequencies[genre] += 1
       end
       frequencies
+    elsif option == :tracks
+      tracks.each do |track|
+        frequencies[track] += 1
+      end
+      frequencies
     end
   end
 

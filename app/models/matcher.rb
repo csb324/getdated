@@ -4,21 +4,13 @@ class Matcher
     @user1, @user2 = user1, user2
   end
 
-  def shared_tracks
-    @user1.tracks.map(&:spotify_id) & @user2.tracks.map(&:spotify_id)
-  end
-
-  def tracks_count
-    shared_tracks.length
-  end
-
   def shared(option)
     if option == :artists
       @user1.artists & @user2.artists
     elsif option == :genres
       @user1.genres & @user2.genres
-    else
-      puts "please pass in :artists or :genres"
+    elsif option == :tracks
+      @user1.tracks & @user2.tracks
     end
   end
 
@@ -43,10 +35,25 @@ class Matcher
   end
 
   def score
-    track_similarity = tracks_count / (((@user1.tracks.count + @user2.tracks.count) - tracks_count) * 1.0)
+    track_similarity = shared_count(:tracks) / (((@user1.tracks.uniq.count + @user2.tracks.uniq.count) - shared_count(:tracks)) * 1.0)
     artist_similarity = shared_count(:artists) / (((@user1.artists.uniq.count + @user2.artists.uniq.count) - shared_count(:artists)) * 1.0)
     genre_similarity = shared_count(:genres) / (((@user1.genres.uniq.count + @user2.genres.uniq.count) - shared_count(:genres)) * 1.0)
-    (track_similarity * 4) + (artist_similarity * 2) + (genre_similarity * 1)
+
+    # Maximum possible raw score is seven (with yourself). Most people are between 0 and 1.
+    raw = (track_similarity * 4) + (artist_similarity * 2) + (genre_similarity * 1)
+    score = raw * 100
+    score.round
+  end
+
+  def sample(option)
+    if option == :tracks
+      names = shared(:tracks).map{ |item| item.name }
+      names.shuffle
+      names[0...3]
+    else
+      names = top_shared(option).map { |item| item[0].name }
+      names.shuffle
+    end
   end
 
 end

@@ -1,13 +1,39 @@
-.row
-  .large-2.columns
-  .large-10.columns
-    -if user_signed_in?
-      %img{src: @user.image}
+.row.user-profile
+  .medium-8.columns
+    %img.profpic{src: @user.image}
+    .top-info
+      %h3.user-name= @user.display_name
       = form_tag(favorites_path, method: 'post') do
         = hidden_field_tag :target_id, @user.id
         = submit_tag "favorite", class: 'button'
-      %h4 I am #{@user.display_name || @user}
-      %p I'm #{@user.age} years old
-      %p I'm #{@user.gender.capitalize} and I'm looking for #{@user.interested_in.capitalize}
-      %p I live closest to #{@user.location}
-      %p A little about me... #{@user.bio}
+    .bio-info
+      %h4 About #{@user.display_name}
+      %p #{@user.age}, #{@user.location.capitalize}
+      %p #{@user.gender.capitalize} looking for #{@user.interested_in.capitalize}s
+      %h4 Bio
+      %p= @user.bio
+  -if @user != current_user
+    .medium-4.columns.match-info
+      %h3.score score: #{@match.score}
+      .shared-artists
+        %h3 shared artists
+        %ul
+          -@match.sample(:artists).each do |artist|
+            %li= artist
+      .shared-genres
+        %h3 shared genres
+        %ul
+          -@match.sample(:genres).each do |genre|
+            %li= genre
+      .shared-tracks
+        %h3 shared tracks
+        %ul
+          -@match.sample(:tracks).each do |track|
+            %li= track
+
+
+
+
+
+
+
