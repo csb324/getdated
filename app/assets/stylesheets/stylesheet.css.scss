@@ -7,8 +7,16 @@ body{
 
    }
 
-   #mah-profile a {
+   ul {
+    list-style-type: none;
+   }
 
-  }
+   img {
+    max-width: 200px;
+    max-height: 200px;
+   }
 
+   strong {
+    font-size: 24px;
+   }
 }

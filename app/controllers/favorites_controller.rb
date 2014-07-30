@@ -3,8 +3,19 @@ class FavoritesController < ApplicationController
   before_action :set_user
 
   def index
-    # favourited users associated with current user
-    @favorites = @user.favorites
+    @target_users = []
+    # favourited users associated with current user mutually liked
+    @favorites = Favorite.where(fav_initiator: @user, liked_back: true)
+    @favorites += Favorite.where(fav_receiver: @user, liked_back: true)
+
+    # @favorites.each do |favorite|
+    #   @target_users << favorite.other_user(@user)
+    # end
+
+  end
+
+  def show
+    @favorite = Favorite.find_by(params[:id])
   end
 
   def create
