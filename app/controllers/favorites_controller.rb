@@ -4,12 +4,12 @@ class FavoritesController < ApplicationController
 
   def index
     # favourited users associated with current user
-    @favorites = @user.favorites
+    @favorites = Favorite.find_by(fav_initiator: @user, liked_back: true)
   end
 
   def create
     @target = User.find(params[:target_id])
-    binding.pry
+
     @favorite = Favorite.find_by(fav_initiator: @target, fav_receiver: @user)
 
     if @favorite
