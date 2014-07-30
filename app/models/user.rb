@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
    ['San Francisco, CA', 'sanfrancisco'],['San Diego, CA', 'sandiego'],
    ['Seattle, WA', 'seattle'],['Washington, D.C.','washington']]
 
-  has_many :tracks, dependent: :destroy
+  has_and_belongs_to_many :tracks
   has_many :favorites, dependent: :destroy
   has_many :artists, through: :tracks
   has_many :genres, through: :artists

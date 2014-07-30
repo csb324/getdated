@@ -1,3 +1,9 @@
-DOING RIGHT NOW: on login, redirect to a nice little loading-screen
+DOING RIGHT NOW: make users-and-tracks many-to-many relationship
 
-TOMORROW: make users-and-tracks many-to-many relationship
+clara = User.find(64)
+brian = User.find(67)
+eric = User.find(66)
+boys = Matcher.new(eric, brian)
+meanderic = Matcher.new(clara, eric)
+meandbrian = Matcher.new(clara, brian)
+
