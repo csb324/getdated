@@ -1,17 +1,18 @@
 .row
   .large-2.columns
   .large-8.columns
-    %h1 Get Dated Upon!
+    %h1 Just Duet!
     -if !user_signed_in?
-      %h3= link_to "sign in", user_omniauth_authorize_path(:spotify)
+      %h3= link_to "sign in", user_omniauth_authorize_url(:spotify), id: "sign-in-link"
     -else
       %h5= link_to "sign out", destroy_user_session_path, method: :delete
 
-.row
+.row#show-all-users
   .large-1.columns
   .large-10.columns
     -if user_signed_in?
       %ul.large-block-grid-3
         -@users.each do |user|
           %li
-            = link_to(image_tag(user.image), user_path(user))
+            -if current_user != user
+              = link_to(image_tag(user.image), user_path(user))

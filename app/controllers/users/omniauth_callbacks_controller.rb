@@ -1,7 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def spotify
-    # You need to implement the method below in your model (e.g. app/models/user.rb)
     @user = User.from_omniauth(request.env['omniauth.auth'])
 
     if @user.persisted?
@@ -13,8 +12,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def after_sign_in_path_for(user)
+    Track.refresh(request.env['omniauth.auth']['credentials'], user)
     if user.location?
-      Track.refresh(request.env['omniauth.auth']['credentials'], user)
       super user
     else
       finish_signup_path(user)
