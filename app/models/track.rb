@@ -1,6 +1,6 @@
 class Track < ActiveRecord::Base
 
-  belongs_to :user
+  has_and_belongs_to_many :users
   belongs_to :artist
 
   def self.refresh(credentials, current_user)
@@ -36,15 +36,13 @@ class Track < ActiveRecord::Base
             returned_ids << track['track']['id']
 
             @newtrack = Track.find_by(
-              spotify_id: track['track']['id'],
-              user: @user
+              spotify_id: track['track']['id']
             )
 
             if @newtrack == nil && track['track']['id'] != nil
               @newtrack = Track.new(spotify_id: track['track']['id'])
               @newtrack.spotify_id = track['track']['id']
               @newtrack.name = track['track']['name']
-              @newtrack.user = @user
 
               @newtrack.artist = Artist.find_by(
                 :spotify_id => track['track']['artists'].first['id'],
@@ -54,8 +52,9 @@ class Track < ActiveRecord::Base
                   :spotify_id => track['track']['artists'].first['id'],
                   :name => track['track']['artists'].first['name'])
                 new_artists << @newtrack.artist
+                @newtrack.save!
               end
-              @newtrack.save!
+              @user.tracks << @newtrack
             end
           end
         end
