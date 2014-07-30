@@ -33,21 +33,40 @@ class User < ActiveRecord::Base
     end
   end
 
-  def artists_with_frequencies
+  ## JUST DID THIS!!!!
+
+  def frequencies_of(option)
     frequencies = Hash.new(0)
-    artists.each do |artist|
-      frequencies[artist] += 1
+    if option == :artists
+      artists.each do |artist|
+        frequencies[artist] += 1
+      end
+      frequencies
+    elsif option == :genres
+      genres.each do |genre|
+        frequencies[genre] += 1
+      end
+      frequencies
+    else
+      puts "enter :artists or :genres plz"
     end
-    frequencies
   end
 
-  def genres_with_frequencies
-    frequencies = Hash.new(0)
-    genres.each do |genre|
-      frequencies[genre] += 1
-    end
-    frequencies
-  end
+  # def artists_with_frequencies
+  #   frequencies = Hash.new(0)
+  #   artists.each do |artist|
+  #     frequencies[artist] += 1
+  #   end
+  #   frequencies
+  # end
+
+  # def genres_with_frequencies
+  #   frequencies = Hash.new(0)
+  #   genres.each do |genre|
+  #     frequencies[genre] += 1
+  #   end
+  #   frequencies
+  # end
 
   def self.new_with_session(params, session)
     super.tap do |user|

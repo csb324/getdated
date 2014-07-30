@@ -12,50 +12,34 @@ class Matcher
     shared_tracks.length
   end
 
-  def shared_artists
-    @user1.artists & @user2.artists
-  end
-
-  def artists_count
-    shared_artists.length
-  end
-
-  def artists_by_shared_frequency
-    shared_artists_by_freq = Hash.new(0)
-    users = [@user1, @user2]
-    shared_artists.each do |artist|
-      both_freqs = users.map do |user|
-        user.artists_with_frequencies[artist]
-      end
-      shared_artists_by_freq[artist] = both_freqs.min
+  def shared(option)
+    if option == :artists
+      @user1.artists & @user2.artists
+    elsif option == :genres
+      @user1.genres & @user2.genres
+    else
+      puts "please pass in :artists or :genres"
     end
-    # this will turn the hash into an array of 2-element arrays (which we can sort!)
-    shared_artists_by_freq.sort_by{ |artist, count| count }.reverse
   end
 
-  def top_shared_artists(limit = 3)
-    artists_by_shared_frequency[0...limit]
+  def shared_count(option)
+    shared(option).length
   end
 
-  def shared_genres
-    @user1.genres & @user2.genres
-  end
-
-  def genres_by_shared_frequency
-    shared_genres_by_freq = Hash.new(0)
+  def shared_by_frequency(option)
+    by_freq = Hash.new(0)
     users = [@user1, @user2]
-    shared_genres.each do |genre|
-      both_freqs = users.map do |user|
-        user.genres_with_frequencies[genre]
+    shared(option).each do |item|
+      both_freq = users.map do |user|
+        user.frequencies_of(option)[item]
       end
-      shared_genres_by_freq[genre] = both_freqs.min
+      by_freq[item] = both_freq.min
     end
-    # see above!
-    shared_genres_by_freq.sort_by{ |genre, count| count }.reverse
+    by_freq.sort_by{ |item, count| count }.reverse
   end
 
-  def top_shared_genres(limit = 3)
-    genres_by_shared_frequency[0...limit]
+  def top_shared(option, limit = 3)
+    shared_by_frequency(option)[0...limit]
   end
 
 end
