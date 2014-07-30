@@ -46,8 +46,6 @@ class User < ActiveRecord::Base
         frequencies[genre] += 1
       end
       frequencies
-    else
-      puts "enter :artists or :genres plz"
     end
   end
 

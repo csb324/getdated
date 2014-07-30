@@ -3,7 +3,7 @@
   .large-8.columns
     %h1 Just Duet!
     -if !user_signed_in?
-      %h3= link_to "sign in", user_omniauth_authorize_path(:spotify)
+      %h3= link_to "sign in", user_omniauth_authorize_url(:spotify), id: "sign-in-link"
     -else
       %h5= link_to "sign out", destroy_user_session_path, method: :delete
 

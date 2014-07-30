@@ -11,7 +11,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-
   def after_sign_in_path_for(user)
     Track.refresh(request.env['omniauth.auth']['credentials'], user)
     if user.location?
@@ -20,6 +19,5 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       finish_signup_path(user)
     end
   end
-
 
 end

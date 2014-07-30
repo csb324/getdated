@@ -30,27 +30,22 @@ class Track < ActiveRecord::Base
             @newtrack.spotify_id = track['track']['id']
             @newtrack.name = track['track']['name']
             @newtrack.user = @user
+
+            # I would bet there's a better way to do this.
             if track['track']['artists'].first['id'] != nil
               @newtrack.artist = Artist.find_or_create_by(
                 :spotify_id => track['track']['artists'].first['id'],
                 :name => track['track']['artists'].first['name'])
             end
             @newtrack.save!
+
           end
         end
       end
     end
 
-    current_user.artists.uniq.each do |artist|
+    Artist.refresh(current_user)
 
-      artist_json_string = RestClient.get "https://api.spotify.com/v1/artists/#{artist.spotify_id}"
-      artist_hash = JSON.parse artist_json_string
-      artist.genres = []
-      artist_hash['genres'].each do |genre|
-        @genre = Genre.find_or_create_by(:name => genre)
-        artist.genres << @genre
-      end
-    end
   end
 
 end
