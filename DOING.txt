@@ -1,4 +1,4 @@
-DOING RIGHT NOW: make users-and-tracks many-to-many relationship
+DOING RIGHT NOW: figure out the other-user-profile
 
 clara = User.find(64)
 brian = User.find(67)

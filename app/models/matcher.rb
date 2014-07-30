@@ -4,10 +4,6 @@ class Matcher
     @user1, @user2 = user1, user2
   end
 
-  def shared_tracks
-    @user1.tracks.map(&:spotify_id) & @user2.tracks.map(&:spotify_id)
-  end
-
   def tracks_count
     shared_tracks.length
   end
@@ -17,8 +13,8 @@ class Matcher
       @user1.artists & @user2.artists
     elsif option == :genres
       @user1.genres & @user2.genres
-    else
-      puts "please pass in :artists or :genres"
+    elsif option == :tracks
+      @user1.tracks & @user2.tracks
     end
   end
 
