@@ -1,24 +1,23 @@
 .row
-  .large-2.columns
-  .large-8.columns
-    %h1 Just Duet!
+  .large-10.columns.large-centered
+    %h1 See your Matches! You ugly fucking cunts!
     -if !user_signed_in?
       %h3= link_to "sign in", user_omniauth_authorize_url(:spotify), id: "sign-in-link"
     -else
       %h5= link_to "sign out", destroy_user_session_path, method: :delete
 
 .row#show-all-users
-  .large-1.columns
-  .large-10.columns
+  .large-10.columns.large-centered
     -if user_signed_in?
       %ul.large-block-grid-3
         %table
-          -@user.favorites do |user|
-            -if current_user != user
-              %tr
-                %td
-                  %li= link_to(image_tag(user.image), user_path(user))
-                %td
-                  %h3= user.display_name
-                  %span= user.age
+          -@favorites.each do |favorite|
+            %tr
+              %td
+                %li= link_to(image_tag(favorite.other_user(current_user).image),
+                  user_path(favorite.other_user(current_user)))
+              %td
+                %li= link_to('Message', favorite)
+                %h3= favorite.other_user(current_user).display_name
+                %span= favorite.other_user(current_user).age
 
