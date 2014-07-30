@@ -9,7 +9,6 @@ class FavoritesController < ApplicationController
 
   def create
     @target = User.find(params[:target_id])
-    binding.pry
     @favorite = Favorite.find_by(fav_initiator: @target, fav_receiver: @user)
 
     if @favorite
@@ -24,9 +23,9 @@ class FavoritesController < ApplicationController
     # @favorite.user_2 = fav_target
 
     if @favorite.save
-      redirect_to :back
+      redirect_to user_path(@target), notice: "You did the thing!"
     else
-      redirect_to :back, notice: "that didn't work for some reason"
+      redirect_to user_path(@target), notice: "that didn't work for some reason"
     end
 
   end
