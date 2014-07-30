@@ -8,16 +8,25 @@ class FavoritesController < ApplicationController
   end
 
   def create
-    @favorite = Favorite.new
-    @favorite.user_1 = current_user.id
-    # User_2 is target user
-    fav_target = params[:user_2_id].key('')
-    @favorite.user_2 = fav_target
+    @target = User.find(params[:target_id])
+    binding.pry
+    @favorite = Favorite.find_by(fav_initiator: @target, fav_receiver: @user)
+
+    if @favorite
+      @favorite.liked_back = true
+    else
+      @favorite = Favorite.new(fav_initiator: @user, fav_receiver: @target)
+    end
+
+    # @favorite.user_1 = current_user.id
+    # # User_2 is target user
+    # fav_target = params[:user_2_id].key('')
+    # @favorite.user_2 = fav_target
 
     if @favorite.save
       redirect_to :back
     else
-      redirect_to :back
+      redirect_to :back, notice: "that didn't work for some reason"
     end
 
   end
@@ -29,7 +38,7 @@ class FavoritesController < ApplicationController
   end
 
   def favorite_params
-    params.require(:favorite).permit(:user_1, :user_2, :liked_back, :id)
+    params.require(:favorite).permit(:user_1, :user_2, :liked_back)
   end
 
 end
