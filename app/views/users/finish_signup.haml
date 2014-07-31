@@ -1,5 +1,5 @@
 #add-email
-  %h1 Finish your profile
+  %h1.page-title Finish your profile
   = form_for(current_user, :as => 'user', :url => finish_signup_path(current_user), :html => { role: 'form'}) do |f|
     -if @show_errors && current_user.errors.any?
       .error-explanation

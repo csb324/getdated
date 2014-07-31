@@ -1,9 +1,6 @@
-.row
-  .small-12.columns
-    %h1 Just Duet!
-
 -if user_signed_in?
   .row#show-all-users
+    %h2.page-title Your matches
     -@users.each do |user|
       .your-match.row
         .small-10.columns
@@ -14,4 +11,5 @@
         .small-2.columns
           %h3= user.match_with(current_user)
 -else
+  %h3 Welcome to Just Duet, a dating site with MUSIC
   %h3= link_to "Sign in with Spotify", user_omniauth_authorize_url(:spotify), id: "sign-in-link"
