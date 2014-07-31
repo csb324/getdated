@@ -1,17 +1,12 @@
 .row
   .large-10.columns.large-centered
-    %h1 See your Matches!
-
-    -if !user_signed_in?
-      %h3= link_to "sign in", user_omniauth_authorize_url(:spotify), id: "sign-in-link"
-    -else
-      %h5= link_to "sign out", destroy_user_session_path, method: :delete
+    %h1 Your Matches!
 
 .row#show-all-users
   .large-10.columns.large-centered
     -if user_signed_in?
       %ul.large-block-grid-3
-        %table
+        %table.centered
           -@favorites.each do |favorite|
             %tr
               %td
