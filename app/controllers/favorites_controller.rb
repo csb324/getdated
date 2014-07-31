@@ -2,6 +2,8 @@ class FavoritesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
 
+  respond_to :json
+
   def index
     @target_users = []
     # favourited users associated with current user when mutually liked
@@ -15,19 +17,19 @@ class FavoritesController < ApplicationController
   end
 
   def create
-    @target = User.find(params[:target_id])
-    @favorite = Favorite.find_by(fav_initiator: @target, fav_receiver: @user)
+    @target = User.find(favorite_params[:fav_receiver])
+    @favorite = Favorite.find_by(fav_initiator: @target, fav_receiver: current_user)
 
     if @favorite
       @favorite.liked_back = true
     else
-      @favorite = Favorite.new(fav_initiator: @user, fav_receiver: @target)
+      @favorite = Favorite.new(fav_initiator: current_user, fav_receiver: @target)
     end
 
     if @favorite.save
-      redirect_to user_path(@target), notice: "You did the thing!"
+      respond_with(@favorite)
     else
-      redirect_to user_path(@target), notice: "that didn't work for some reason"
+      respond_with(@favorite.errors)
     end
   end
 
@@ -38,7 +40,7 @@ class FavoritesController < ApplicationController
   end
 
   def favorite_params
-    params.require(:favorite).permit(:user_1, :user_2, :liked_back)
+    params.require(:favorite).permit(:fav_initiator, :fav_receiver)
   end
 
 end
