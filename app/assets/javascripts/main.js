@@ -12,7 +12,9 @@ $(document).ready(function(){
 GetDated = {
 
   init: function() {
+    // creates a favorite on click!
     $("#favorite").click(function(event){
+      event.preventDefault();
       var $target = $("#favorite").data("target");
       var $sender = $("#favorite").data("sender");
 
@@ -34,8 +36,31 @@ GetDated = {
       .always(function() {
         console.log("complete");
       });
+    });
+
+    $("#message-form").submit(function(event){
+      event.preventDefault();
+      var $message = $("#message").val();
+      var $favid = $("#message-form").data("favorite_id");
+
+      $.ajax({
+        url: Routes.messages_path(),
+        type: 'POST',
+        dataType: 'json',
+        data: {message: {msg:$message, favorite_id:$favid}},
+      })
+      .done(function() {
+        $("#messages").append($("<tr>")).append($("<h5>").text($message));
+      })
+      .fail(function(data) {
+        console.log(data);
+      })
+      .always(function() {
+        console.log("complete");
+      });
 
     });
+
 
   }
 

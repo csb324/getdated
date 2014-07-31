@@ -3,7 +3,7 @@
     %img{src:current_user.image}
   .small-6.large-6.columns
     %h1 Message your matches!
-    %table
+    %table#messages
       - @messages.each do |msg|
         %tr
           %td
@@ -11,10 +11,13 @@
             sent by- #{User.find(msg.user_id).display_name}
             = time_ago_in_words(msg.created_at)
             ago
-    = form_for [Message.new] do |f|
-      = f.hidden_field :favorite_id, value: @favorite.id
-      = f.label :msg
-      = f.text_field :msg
-      = f.submit
+    %form#message-form{"data-favorite_id" => @favorite.id}
+      %input#message{type: "text"}
+      %input{type: "submit"}
+    -# = form_for [Message.new] do |f|
+    -#   = f.hidden_field :favorite_id, value: @favorite.id
+    -#   = f.label :msg
+    -#   = f.text_field :msg
+    -#   = f.submit
   .small-3.large-3.columns
     %img{src:@favorite.other_user(current_user).image}

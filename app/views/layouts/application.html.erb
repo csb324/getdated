@@ -14,9 +14,13 @@
 </head>
 <body>
 
-<% if !current_page? finish_signup_path(current_user) %>
+<% if user_signed_in? %>
+  <% if !current_page? finish_signup_path(current_user) %>
+  <%= render 'shared/nav_bar' %>
+  <%end%>
+<% else %>
 <%= render 'shared/nav_bar' %>
-<% end %>
+<%end%>
 
 <div class="row">
 
