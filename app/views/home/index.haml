@@ -1,21 +1,18 @@
 .row
   .small-12.columns
     %h1 Just Duet!
-    -if !user_signed_in?
-      %h3= link_to "sign in", user_omniauth_authorize_url(:spotify), id: "sign-in-link"
-    -else
-      %h5= link_to "sign out", destroy_user_session_path, method: :delete
 
-.row#show-all-users
-  .large-12.columns
-    -if user_signed_in?
+-if user_signed_in?
+  .row#show-all-users
+    .large-12.columns
       -@users.each do |user|
         .your-match.row
           .small-10.columns
             =image_tag(user.image.url(:square_100))
             .user-info
               %h3= link_to user.display_name, user_path(user)
-              %span= user.age
+              %span #{user.age}, #{user.location.capitalize}
           .small-2.columns
             %h3= user.match_with(current_user)
-
+-else
+  %h3 link_to "Sign in with Spotify", user_omniauth_authorize_url(:spotify), id: "sign-in-link"
