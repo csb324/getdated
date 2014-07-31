@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140730175009) do
+ActiveRecord::Schema.define(version: 20140731172151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20140730175009) do
     t.string   "msg"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "read",        default: false
   end
 
   add_index "messages", ["favorite_id"], name: "index_messages_on_favorite_id", using: :btree
