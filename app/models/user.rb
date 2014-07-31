@@ -39,6 +39,11 @@ class User < ActiveRecord::Base
     end
   end
 
+
+  def score_with(other_person)
+    Matcher.new(self, other_person).score
+  end
+
   # for working out match score by option
   def frequencies_of(option)
     frequencies = Hash.new(0)
