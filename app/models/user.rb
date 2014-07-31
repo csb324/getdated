@@ -1,11 +1,13 @@
 class User < ActiveRecord::Base
 
+  mount_uploader :image, AvatarUploader
+
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable,
   :omniauthable, :omniauth_providers => [:spotify]
 
   validates :email, uniqueness: true
-  validates :display_name, uniqueness:true
+  validates :display_name, uniqueness: true
 
   CITIES = [['Atlanta, GA', 'atlanta'], ['Boston, MA', 'boston'],['Denver, CO','denver'],
    ['Las Vegas, NV','lasvegas'],['Los Angeles, CA','losangeles'],
@@ -29,8 +31,8 @@ class User < ActiveRecord::Base
       user.password = Devise.friendly_token[0,20]
       user.name = auth.info.name # assuming the user model has a name
       user.uid = auth.uid
-      user.image = auth['info']['image'] || "http://thumbs.dreamstime.com/z/grooving-puppy-3978556.jpg"
       user.provider = auth.provider
+      #user.image = auth['info']['image'] || "http://thumbs.dreamstime.com/z/grooving-puppy-3978556.jpg"
     end
   end
 

@@ -13,3 +13,5 @@
   = f.label :bio
 .controls
   = f.text_area :bio, value: current_user.bio, placeholder:'Tell us about yourself! ', required: ''
+.controls
+  = f.file_field :image
