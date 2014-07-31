@@ -22,7 +22,12 @@
     <% if user_signed_in? %>
     <ul class='right'>
       <div id='mah-profile'>
-        <li id='my-profile'><%= link_to 'My Profile', user_path(current_user) %></li>
+        <li id='my-profile'><%= link_to 'My Profile', user_path(current_user) %> <span><%= link_to "sign out", destroy_user_session_path, method: :delete %></span></li>
+      </div>
+    </ul>
+    <ul>
+      <div id='favorites'>
+        <li id='my_favorites'><%= link_to 'My Favorites', favorites_path %></li>
       </div>
     </ul>
     <%end%>
