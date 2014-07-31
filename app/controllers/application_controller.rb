@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def ensure_signup_complete
     return if action_name == 'finish_signup'
 
-    if current_user.email == 'temp@gmail.com'
+    if current_user.email == '12324857203948572304857230948750923847509283475@example.com'
       redirect_to finish_signup_path(current_user)
     end
   end
@@ -20,9 +20,9 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password,
-      :password_confirmation, :remember_me, :image, :image_cache) }
+      :password_confirmation, :remember_me, :remote_image_url, :image, :image_cache) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password,
-      :password_confirmation, :current_password, :image, :image_cache, :bio) }
+      :password_confirmation, :current_password, :remote_image_url, :image, :image_cache, :bio) }
   end
 
 end

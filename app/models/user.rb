@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
    ['Seattle, WA', 'seattle'],['Washington, D.C.','washington']]
 
   has_and_belongs_to_many :tracks
-  has_many :favorites, dependent: :destroy
+  has_many :favorites, foreign_key: 'fav_initiator_id', dependent: :destroy
   has_many :artists, through: :tracks
   has_many :genres, through: :artists
 
@@ -32,7 +32,8 @@ class User < ActiveRecord::Base
       user.name = auth.info.name # assuming the user model has a name
       user.uid = auth.uid
       user.provider = auth.provider
-      #user.image = auth['info']['image'] || "http://thumbs.dreamstime.com/z/grooving-puppy-3978556.jpg"
+
+      user.update(remote_image_url: auth['info']['image'] || "http://thumbs.dreamstime.com/z/grooving-puppy-3978556.jpg")
     end
   end
 
