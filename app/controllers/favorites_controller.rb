@@ -13,8 +13,10 @@ class FavoritesController < ApplicationController
     @favorite = Favorite.find(params[:id])
     @messages = Message.where(favorite: @favorite).reverse
     @messages.each do |msg|
-      msg.read = true
-      msg.save
+      if msg.user != current_user
+        msg.read = true
+        msg.save
+      end
     end
   end
 
