@@ -106,10 +106,11 @@ class User < ActiveRecord::Base
 
   def favorite_music(option)
     my_faves = []
-    frequencies_of(option)[0...5].each do |fav|
+    freq_descending = frequencies_of(option).sort_by{ |item, count| count }.reverse
+    freq_descending[0...5].each do |fav|
       my_faves << fav[0]
     end
-    my_faves
+    my_faves.shuffle
   end
 
   def potential_matches
