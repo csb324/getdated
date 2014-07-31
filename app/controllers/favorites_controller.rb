@@ -28,6 +28,10 @@ class FavoritesController < ApplicationController
 
     if @favorite
       @favorite.liked_back = true
+      @message = Message.new(user: current_user)
+      @message.favorite = @favorite
+      @message.msg = "Congratulations! It's a match!"
+      @message.save
     else
       @favorite = Favorite.new(fav_initiator: current_user, fav_receiver: @target)
     end

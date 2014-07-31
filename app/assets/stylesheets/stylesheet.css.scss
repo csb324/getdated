@@ -1,4 +1,9 @@
 body{
+  // background: black;
+  .row {
+    background: white;
+  }
+
   .top-bar .name h1 a {
     color: white;
     font-family: 'Indie Flower', cursive;
@@ -6,21 +11,11 @@ body{
 
   h1{
     font-family: 'Indie Flower', cursive;
-    font-size: 100px;
     text-align: center;
   }
 
   ul {
-  list-style-type: none;
-  }
-
-  img {
-  max-width: 200px;
-  max-height: 200px;
-  }
-
-  strong {
-  font-size: 24px;
+    list-style-type: none;
   }
 
 }

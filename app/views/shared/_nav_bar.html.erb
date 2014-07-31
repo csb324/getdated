@@ -1,0 +1,24 @@
+<div class="contain-to-grid sticky">
+  <nav class="top-bar" data-topbar data-options="sticky_on: large">
+    <ul class='title-area'>
+      <li class='name'>
+        <h1><%= link_to 'JUST DUET', root_path %></h1>
+      </li>
+    </ul>
+    <% if user_signed_in? %>
+      <section class="top-bar-section">
+        <ul class='right'>
+          <li id="unread-messages" <% if current_user.unread_count != 0 %> class="omg"<% end %>>
+            <%= link_to favorites_path do %>
+            <%= current_user.unread_count %> <i class="fa fa-envelope-o"></i>
+            <% end %>
+          </li>
+          <li id='message-count'></li>
+          <li id='my-profile'><%= link_to 'My Profile', user_path(current_user) %></li>
+          <li id='my-favorites'><%= link_to 'My Matches', favorites_path %>
+          <li id='sign-out'><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+        </ul>
+      </section>
+    <%end%>
+  </nav>
+</div>
