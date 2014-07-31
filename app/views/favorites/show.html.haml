@@ -1,23 +1,16 @@
 .row.single-conversation
-  .small-3.large-3.columns
-    %img{src:current_user.image}
-  .small-6.large-6.columns
-    %h1 Message your matches!
-    %table#messages
-      - @messages.each do |msg|
-        %tr
-          %td
-            %h5= msg.msg
-            sent by- #{User.find(msg.user_id).display_name}
-            = time_ago_in_words(msg.created_at)
-            ago
+  .small-3.columns
+    %img.profile-picture{src:current_user.image}
+  .small-6.columns
+    .header
+      %h2 Your messages with #{@favorite.other_user(current_user).display_name}
+    -@messages.each do |msg|
+      .message{class: msg.message_class(current_user)}
+        .message-body= msg.msg
+        %p.message-info #{time_ago_in_words(msg.created_at)} ago
+
     %form#message-form{"data-favorite_id" => @favorite.id}
       %input#message{type: "text"}
       %input{type: "submit"}
-    -# = form_for [Message.new] do |f|
-    -#   = f.hidden_field :favorite_id, value: @favorite.id
-    -#   = f.label :msg
-    -#   = f.text_field :msg
-    -#   = f.submit
-  .small-3.large-3.columns
-    %img{src:@favorite.other_user(current_user).image}
+  .small-3.columns
+    %img.profile-picture{src:@favorite.other_user(current_user).image}

@@ -104,6 +104,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def favorite_music(option)
+    my_faves = []
+    frequencies_of(option)[0...5].each do |fav|
+      my_faves << fav[0]
+    end
+    my_faves
+  end
+
   def potential_matches
     potentials = []
     User.where(location: location).find_each do |user|

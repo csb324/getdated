@@ -8,4 +8,13 @@ class Message < ActiveRecord::Base
     read = true
   end
 
+  def message_class(me)
+    if me == user
+      "sent"
+    else
+      "received"
+    end
+  end
+
+
 end
