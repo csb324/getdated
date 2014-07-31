@@ -4,15 +4,14 @@
 
 -if user_signed_in?
   .row#show-all-users
-    .large-12.columns
-      -@users.each do |user|
-        .your-match.row
-          .small-10.columns
-            =image_tag(user.image.url(:square_100))
-            .user-info
-              %h3= link_to user.display_name, user_path(user)
-              %span #{user.age}, #{user.location.capitalize}
-          .small-2.columns
-            %h3= user.match_with(current_user)
+    -@users.each do |user|
+      .your-match.row
+        .small-10.columns
+          =image_tag(user.image.url(:square_100))
+          .user-info
+            %h3= link_to user.display_name, user_path(user)
+            %span #{user.age}, #{user.location.capitalize}
+        .small-2.columns
+          %h3= user.match_with(current_user)
 -else
   %h3 link_to "Sign in with Spotify", user_omniauth_authorize_url(:spotify), id: "sign-in-link"
