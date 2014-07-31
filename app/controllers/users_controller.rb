@@ -12,7 +12,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    # @users = User.all
+    @users = current_user.potential_matches
   end
 
   def finish_signup
