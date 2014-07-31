@@ -13,7 +13,7 @@ class FavoritesController < ApplicationController
 
   def show
     @favorite = Favorite.find(params[:id])
-    @messages = Message.where(favorite: @favorite).reverse
+    @messages = Message.where(favorite: @favorite).sort()
     @messages.each do |msg|
       if msg.user != current_user
         msg.read = true

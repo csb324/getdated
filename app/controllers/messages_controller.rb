@@ -2,6 +2,8 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
 
+  respond_to :json
+
   def new
     @message = Message.new
   end
@@ -13,9 +15,9 @@ class MessagesController < ApplicationController
     @message.user = current_user
 
     if @message.save
-      redirect_to @favorite, notice: "You're pretty"
+      respond_with(@favorite)
     else
-      redirect_to favorite_path(@favorite), notice: "Sorry Buddy something went wrong"
+      respond_with(@favorite.errors)
     end
   end
 
@@ -24,6 +26,6 @@ class MessagesController < ApplicationController
     @user = current_user
   end
   def message_params
-    params.require(:message).permit(:msg)
+    params.require(:message).permit(:msg, :favorite_id)
   end
 end

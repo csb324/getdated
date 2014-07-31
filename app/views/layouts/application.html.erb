@@ -12,12 +12,15 @@
 <body>
 
 <% if user_signed_in? %>
- <% if !current_page? finish_signup_path(current_user) %>
- <%= render 'shared/nav_bar' %>
- <%end%>
+  <% if !current_page? finish_signup_path(current_user) %>
+    <%= render 'shared/nav_bar' %>
+  <%end%>
 <% else %>
-<%= render 'shared/nav_bar' %>
-<% end %>
+  <%= render 'shared/nav_bar' %>
+<%end%>
+
+<h2 class="notice"><%= flash[:notice] %></h2>
+<h2 class="alert"><%= flash[:alert] %></h2>
 
 <div class="row master-row">
 <div class="small-12 column everything">
