@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def match_with(other_person)
+    Matcher.new(self, other_person).score
+  end
+
   def frequencies_of(option)
     frequencies = Hash.new(0)
     if option == :artists
