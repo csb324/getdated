@@ -2,14 +2,6 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
 
-  def index
-    @messages = current_user.messages#.sort(created_at: :desc)
-  end
-
-  def show
-    # only show for current user
-  end
-
   def new
     @message = Message.new
   end
@@ -22,23 +14,12 @@ class MessagesController < ApplicationController
 
     if @message.save
       redirect_to @favorite, notice: "You're pretty"
-      flash[:notice] = "Cunty McCunterson"
     else
-      # redirect_to favorite_path(@favorite) notice: "yeah... nah."
-      flash[:notice] = "Yeah... nah"
+      redirect_to favorite_path(@favorite), notice: "Sorry Buddy something went wrong"
     end
   end
 
-  def update
-    # Ajax calls
-    # - when user submits
-    # - user leaves or rejoins
-  end
-
   private
-  # def set_favorite
-  #   @favorite = Favorite.find(params[:id])
-  # end
   def set_user
     @user = current_user
   end

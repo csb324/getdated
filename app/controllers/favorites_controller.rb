@@ -4,14 +4,9 @@ class FavoritesController < ApplicationController
 
   def index
     @target_users = []
-    # favourited users associated with current user mutually liked
+    # favourited users associated with current user when mutually liked
     @favorites = Favorite.where(fav_initiator: @user, liked_back: true)
     @favorites += Favorite.where(fav_receiver: @user, liked_back: true)
-
-    # @favorites.each do |favorite|
-    #   @target_users << favorite.other_user(@user)
-    # end
-
   end
 
   def show
@@ -29,17 +24,11 @@ class FavoritesController < ApplicationController
       @favorite = Favorite.new(fav_initiator: @user, fav_receiver: @target)
     end
 
-    # @favorite.user_1 = current_user.id
-    # # User_2 is target user
-    # fav_target = params[:user_2_id].key('')
-    # @favorite.user_2 = fav_target
-
     if @favorite.save
       redirect_to user_path(@target), notice: "You did the thing!"
     else
       redirect_to user_path(@target), notice: "that didn't work for some reason"
     end
-
   end
 
   private
