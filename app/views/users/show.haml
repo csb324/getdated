@@ -3,9 +3,10 @@
     %img.profpic{src: @user.image}
     .top-info
       %h3.user-name= @user.display_name
-      = form_tag(favorites_path, method: 'post') do
-        = hidden_field_tag :target_id, @user.id
-        = submit_tag "favorite", class: 'button'
+      -if !current_user.favorite_exists?(@user)
+        = form_tag(favorites_path, method: 'post') do
+          = hidden_field_tag :target_id, @user.id
+          = submit_tag "favorite", class: 'button'
     .bio-info
       %h4 About #{@user.display_name}
       %p #{@user.age}, #{@user.location.capitalize}
