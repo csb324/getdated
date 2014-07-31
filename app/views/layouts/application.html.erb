@@ -9,6 +9,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
    <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -22,9 +23,15 @@
     <% if user_signed_in? %>
     <section class="top-bar-section">
       <ul class='right'>
+        <li id="unread-messages" <% if current_user.unread_count != 0 %> class="omg"<% end %>>
+          <%= link_to favorites_path do %>
+          <%= current_user.unread_count %> <i class="fa fa-envelope-o"></i>
+          <% end %>
+        </li>
+        <li id='message-count'></li>
         <li id='my-profile'><%= link_to 'My Profile', user_path(current_user) %></li>
         <li id='my-favorites'><%= link_to 'My Matches', favorites_path %>
-        <li id='sign-out'><%= link_to 'Sign Out', destroy_user_session_path %>
+        <li id='sign-out'><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
       </ul>
     </section>
     <%end%>

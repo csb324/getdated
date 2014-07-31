@@ -24,6 +24,6 @@ class MessagesController < ApplicationController
     @user = current_user
   end
   def message_params
-    params.require(:message).permit(:sender_id, :msg)
+    params.require(:message).permit(:msg)
   end
 end

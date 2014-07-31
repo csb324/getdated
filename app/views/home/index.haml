@@ -14,4 +14,4 @@
         .small-2.columns
           %h3= user.match_with(current_user)
 -else
-  %h3 link_to "Sign in with Spotify", user_omniauth_authorize_url(:spotify), id: "sign-in-link"
+  %h3= link_to "Sign in with Spotify", user_omniauth_authorize_url(:spotify), id: "sign-in-link"

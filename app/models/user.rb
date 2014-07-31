@@ -57,6 +57,9 @@ class User < ActiveRecord::Base
     unread
   end
 
+  def unread_count
+    unread_messages.length
+  end
 
   # gets information back through Users spotify account
   def self.from_omniauth(auth)
