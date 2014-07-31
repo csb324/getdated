@@ -13,7 +13,7 @@
         = f.label :email
         = f.email_field :email, value: current_user.email, placeholder: 'Please provide an Email!', required: '', id:'email-input'
 
-      =render 'shared/form_part', f: f
+      =render 'shared/form_part', f: f, user: current_user
 
     .actions
       = f.submit 'continue'

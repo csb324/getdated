@@ -13,7 +13,10 @@
   = f.label :bio
 .controls
   = f.text_area :bio, value: current_user.bio, placeholder:'Tell us about yourself! ', required: ''
-.controls
-  = f.file_field :image
-  %h4 or
-  = f.text_field :remote_image_url
+.controls.row
+  .medium-3.column
+    = image_tag(user.image_url)
+  .medium-9.column
+    = f.file_field :image
+    %h4 or
+    = f.text_field :remote_image_url

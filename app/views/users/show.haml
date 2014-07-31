@@ -30,4 +30,6 @@
         %ul
           -@match.sample(:tracks).each do |track|
             %li= track
+  -if @user == current_user
+    = link_to "edit your profile", edit_user_registration_path, class: 'button'
 
