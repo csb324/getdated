@@ -62,20 +62,15 @@ class User < ActiveRecord::Base
   end
 
   def potential_matches
-    potential_matches = User.where(location: location)
-    if interested_in != "both"
-      potential_matches = potential_matches.select do |user|
-        user.gender == interested_in
+    potentials = []
+    User.where(location: location).find_each do |user|
+      if interested_in == "both" || interested_in == user.gender
+        if user.interested_in == "both" || user.interested_in == gender
+          potentials << user unless user == self
+        end
       end
     end
-    potential_matches = potential_matches.select do |user|
-      if user.interested_in == "both"
-        true
-      else
-        user.interested_in == gender
-      end
-    end
-    potential_matches
+    potentials
   end
 
   def self.new_with_session(params, session)

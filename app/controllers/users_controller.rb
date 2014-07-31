@@ -5,15 +5,9 @@ class UsersController < ApplicationController
   respond_to :html, :json
 
   def show
-    @user = User.find(params[:id])
     if current_user != @user
       @match = Matcher.new(current_user, @user)
     end
-  end
-
-  def index
-    # @users = User.all
-    @users = current_user.potential_matches
   end
 
   def finish_signup
