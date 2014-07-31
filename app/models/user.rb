@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true
   validates :display_name, uniqueness:true
+  validates :bio, uniqueness:true
 
+  # list of cities you can select from
   CITIES = [['Atlanta, GA', 'atlanta'], ['Boston, MA', 'boston'],['Denver, CO','denver'],
    ['Las Vegas, NV','lasvegas'],['Los Angeles, CA','losangeles'],
    ['Miami, FL','miami'],['New York, NY','newyork'],
@@ -19,6 +21,7 @@ class User < ActiveRecord::Base
   has_many :artists, through: :tracks
   has_many :genres, through: :artists
 
+  # gets information back through Users spotify account
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       if auth.info.email?
@@ -34,6 +37,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  # for working out match score by option
   def frequencies_of(option)
     frequencies = Hash.new(0)
     if option == :artists
@@ -54,6 +58,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  # gets new stuff at beginning of session
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.spotify_data"] && session["devise.spotify_data"]["extra"]["raw_info"]
