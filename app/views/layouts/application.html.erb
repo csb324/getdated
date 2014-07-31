@@ -20,13 +20,13 @@
       </li>
     </ul>
     <% if user_signed_in? %>
-    <section class="top-bar-section">
-      <ul class='right'>
-        <li id='my-profile'><%= link_to 'My Profile', user_path(current_user) %></li>
-        <li id='my-favorites'><%= link_to 'My Matches', favorites_path %>
-        <li id='sign-out'><%= link_to 'Sign Out', destroy_user_session_path %>
-      </ul>
-    </section>
+      <section class="top-bar-section">
+        <ul class='right'>
+          <li id='my-profile'><%= link_to 'My Profile', user_path(current_user) %></li>
+          <li id='my-favorites'><%= link_to 'My Matches', favorites_path %>
+          <li id='sign-out'><%= link_to 'Sign Out', destroy_user_session_path %>
+        </ul>
+      </section>
     <%end%>
   </nav>
 </div>

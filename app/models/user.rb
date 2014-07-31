@@ -77,6 +77,17 @@ class User < ActiveRecord::Base
     potentials
   end
 
+  def favorite_exists?(other_user)
+    if Favorite.find_by(fav_initiator: other_user, fav_receiver: self)
+      true
+    elsif Favorite.find_by(fav_receiver: other_user, fav_initiator: self, liked_back: true)
+      true
+    else
+      false
+    end
+  end
+
+#Favourite Button doesn't show up for self or already favourited
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.spotify_data"] && session["devise.spotify_data"]["extra"]["raw_info"]
