@@ -1,0 +1,22 @@
+.controls
+  = f.label :age
+  = f.text_field :age, value: current_user.age, min: '18', max:'100', required: ''
+  = f.label :gender
+.controls
+  = f.select :gender, [['Female','female'], ['Male', 'male']]
+  = f.label :interested_in
+.controls
+  = f.select :interested_in, [['Male', 'male'], ['Female','female'], ['Both', 'both']]
+  = f.label :location
+.controls
+  = f.select :location, User::CITIES
+  = f.label :bio
+.controls
+  = f.text_area :bio, value: current_user.bio, placeholder:'Tell us about yourself! ', required: ''
+.controls.row
+  .medium-3.column
+    = image_tag(user.image_url)
+  .medium-9.column
+    = f.file_field :image
+    %h4 or
+    = f.text_field :remote_image_url

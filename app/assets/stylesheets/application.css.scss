@@ -16,17 +16,12 @@
 
 .user-profile {
   .profpic {
-    width: 150px;
     vertical-align: top;
   }
   form, .top-info {
     display: inline-block;
   }
-  padding-top: 5px;
-  .score {
-    color: white;
-    background: black;
-  }
+  margin-top: 5px;
 }
 .match-info {
   background: #75C92B;

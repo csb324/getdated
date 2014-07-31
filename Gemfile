@@ -15,9 +15,10 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
-# Spotify gems
-gem 'rspotify'
+# Spotify gems SUCK
+# gem 'rspotify'
 gem 'omniauth-spotify'
+gem 'rest-client'
 
 
 # Use jquery as the JavaScript library
@@ -65,6 +66,11 @@ gem 'devise'
 
 gem 'haml-rails'
 gem 'html2haml'
+
+gem 'carrierwave'
+gem 'fog'
+gem 'rmagick', require: false
+gem 'aws-sdk'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

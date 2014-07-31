@@ -1,6 +1,6 @@
 .row.user-profile
   .medium-8.columns
-    %img.profpic{src: @user.image}
+    %img.profpic{src: @user.image.url(:square_100)}
     .top-info
       %h3.user-name= @user.display_name
       = form_tag(favorites_path, method: 'post') do
@@ -30,10 +30,6 @@
         %ul
           -@match.sample(:tracks).each do |track|
             %li= track
-
-
-
-
-
-
+  -if @user == current_user
+    = link_to "edit your profile", edit_user_registration_path, class: 'button'
 

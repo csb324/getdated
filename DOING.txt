@@ -7,3 +7,13 @@ boys = Matcher.new(eric, brian)
 meanderic = Matcher.new(clara, eric)
 meandbrian = Matcher.new(clara, brian)
 
+GEMS:
+carrierwave
+fog
+rmagick
+
+storage :fog
+--- that works with amazon s3
+
+UPLOADER
+mount_uploader :image, AvatarUploader
