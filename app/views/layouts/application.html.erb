@@ -22,6 +22,9 @@
 <%= render 'shared/nav_bar' %>
 <%end%>
 
+<h2 class="notice"><%= flash[:notice] %></h2>
+<h2 class="alert"><%= flash[:alert] %></h2>
+
 <div class="row">
 
 <%= yield %>
