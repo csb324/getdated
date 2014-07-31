@@ -10,9 +10,17 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require foundation
  *= require_tree .
  *= require_self
  */
+
+
+$spotify-green: #75C92B;
+$spotify-sand: #ECEBE8;
+$light-green: #DAE6CC;
+$slab: 'Bitter', serif;
+$sans: 'Raleway', sans-serif;
 
 .user-profile {
   .profpic {
@@ -23,13 +31,58 @@
   }
   margin-top: 5px;
 }
+
 .match-info {
-  background: #75C92B;
+  background: $spotify-green;
 }
 
 .your-match {
   img, .user-info {
     display: inline-block;
   }
-
 }
+
+// IMPORTANT DEFAULT STUFF
+html, body {
+  min-height: 100%;
+  background: black;
+  font-family: $sans;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $slab;
+  }
+  .everything {
+    .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+  .master-row {
+    padding-top: 10px;
+    position: relative;
+    background: white;
+    min-height: 80%;
+  }
+}
+
+// NAVBAR STUFF
+.top-bar, .contain-to-grid {
+  background: $spotify-sand;
+  font-size: 16px;
+  .name h1 a {
+    color: black;
+    font-size: 25px;
+    font-family: $slab;
+    font-weight: bold;
+  }
+  .top-bar-section li:not(.has-form) a:not(.button) {
+    background: $spotify-sand;
+    font-family: $slab;
+    color: black;
+    font-size: 16px;
+    &:hover {
+      background: $light-green;
+    }
+  }
+}
+
+

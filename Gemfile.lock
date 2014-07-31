@@ -110,6 +110,9 @@ GEM
       fog-core
       fog-json
     formatador (0.2.5)
+    foundation-rails (5.3.1.0)
+      railties (>= 3.1.0)
+      sass (>= 3.2.0)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -295,6 +298,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   fog
+  foundation-rails
   haml-rails
   html2haml
   jbuilder (~> 2.0)
