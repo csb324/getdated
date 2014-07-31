@@ -13,7 +13,13 @@ class FavoritesController < ApplicationController
 
   def show
     @favorite = Favorite.find(params[:id])
-    @messages = Message.where(favorite_id: @favorite.id)
+    @messages = Message.where(favorite: @favorite).reverse
+    @messages.each do |msg|
+      if msg.user != current_user
+        msg.read = true
+        msg.save
+      end
+    end
   end
 
   def create

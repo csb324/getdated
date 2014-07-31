@@ -18,9 +18,48 @@ class User < ActiveRecord::Base
    ['Seattle, WA', 'seattle'],['Washington, D.C.','washington']]
 
   has_and_belongs_to_many :tracks
-  has_many :favorites, foreign_key: 'fav_initiator_id', dependent: :destroy
+  has_many :favorites_sent, class_name: "Favorite", foreign_key: :fav_initiator_id
+  has_many :favorites_received, class_name: "Favorite", foreign_key: :fav_receiver_id
+  has_many :messages_sent, class_name: "Message"
   has_many :artists, through: :tracks
   has_many :genres, through: :artists
+
+  def favorites
+    favorites_sent + favorites_received
+  end
+
+  ## some methods that have to do with messages
+  def messages
+    msgs = []
+    favorites.each do |fav|
+      fav.messages.each do |message|
+        msgs << message
+      end
+    end
+    msgs
+  end
+
+  def messages_received
+    sent_array = []
+    messages_sent.each do |msg|
+      sent_array << msg
+    end
+    messages - sent_array
+  end
+
+  def unread_messages
+    unread = []
+    messages_received.each do |msg|
+      if msg.read == false
+        unread << msg
+      end
+    end
+    unread
+  end
+
+  def unread_count
+    unread_messages.length
+  end
 
   # gets information back through Users spotify account
   def self.from_omniauth(auth)

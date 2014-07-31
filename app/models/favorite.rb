@@ -1,7 +1,7 @@
 class Favorite < ActiveRecord::Base
   has_many :messages
-  belongs_to :fav_initiator, :class_name => "User", dependent: :destroy
-  belongs_to :fav_receiver, :class_name => "User", dependent: :destroy
+  belongs_to :fav_initiator, :class_name => "User"
+  belongs_to :fav_receiver, :class_name => "User"
 
   # So you can't multi-favorite someone or favorite yourself
   validates :fav_initiator, uniqueness: { scope: :fav_receiver,
