@@ -23,7 +23,10 @@ GetDated = {
         data: {favorite: {fav_initiator:$sender, fav_receiver:$target}}
       })
       .done(function() {
-        alert("success");
+        console.log("success");
+        $(".favbutton").empty();
+        $(".favbutton").append('<h4>').append("Favorited!");
+
       })
       .fail(function(data) {
         console.log(data);
