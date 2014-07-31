@@ -65,7 +65,18 @@ class User < ActiveRecord::Base
     end
   end
 
-  # gets new stuff at beginning of session
+  def potential_matches
+    potentials = []
+    User.where(location: location).find_each do |user|
+      if interested_in == "both" || interested_in == user.gender
+        if user.interested_in == "both" || user.interested_in == gender
+          potentials << user unless user == self
+        end
+      end
+    end
+    potentials
+  end
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.spotify_data"] && session["devise.spotify_data"]["extra"]["raw_info"]
