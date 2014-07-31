@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   end
 
 
-  def score_with(other_person)
+  def match_with(other_person)
     Matcher.new(self, other_person).score
   end
 
