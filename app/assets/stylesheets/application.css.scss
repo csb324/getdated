@@ -142,6 +142,29 @@ html, body {
 
 #show-all-users {
   // ERIC PUTS STUFF HERE
+
+  display: none;
+
+  .your-match-row {
+    display: none;
+  }
+
+  .page-title {
+    color: $spotify-green;
+    border-bottom: 2px solid black;
+  }
+
+  .small-10.columns {
+    padding-bottom: 8px;
+    border-bottom: 1px solid black;
+  }
+
+  .small-2.columns h3 {
+    float: bottom;
+    font-weight: bold;
+    color: $spotify-green;
+  }
+
 }
 
 .edit-profile {
