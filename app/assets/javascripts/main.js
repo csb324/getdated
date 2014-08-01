@@ -5,6 +5,7 @@ $(document).ready(function(){
     $("#email-input").val('');
   }
   Effects.dothem();
+  Matches.stuff();
   GetDated.init();
 
 });
