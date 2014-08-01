@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def show
     if current_user != @user
-      # creates a match using a comparison spotify data for each user 
+      # creates a match using a comparison spotify data for each user
       @match = Matcher.new(current_user, @user)
     end
   end
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     if request.patch? && params[:user]
       if @user.update(user_params)
         sign_in(@user, :bypass => true)
-        redirect_to root_path, notice: 'Your profile was successfully updated'
+        redirect_to root_path
       else
         @show_errors = true
       end
