@@ -41,6 +41,10 @@ GetDated = {
     $("#message-form").submit(function(event){
       event.preventDefault();
       var $message = $("#message").val();
+      if ($message === "") {
+        return;
+      }
+      $("#message").val("");
       var $favid = $("#message-form").data("favorite_id");
 
       $.ajax({

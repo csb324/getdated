@@ -133,7 +133,17 @@ html, body {
 }
 
 .single-conversation {
-  // CLARA PUTS STUFF HERE
+  .header {
+    width: 100%;
+    border-bottom: 2px solid $spotify-green;
+    margin-bottom: 5px;
+  }
+  .message {
+  }
+  .profile-picture {
+    border-radius: 100%;
+    border: none;
+  }
 }
 
 .all-conversations {
