@@ -17,7 +17,7 @@ class Matcher
   def shared_count(option)
     shared(option).length
   end
-
+  
   def shared_by_frequency(option)
     by_freq = Hash.new(0)
     users = [@user1, @user2]
@@ -34,6 +34,8 @@ class Matcher
     shared_by_frequency(option)[0...limit]
   end
 
+  # How users are ranked together 
+  # Changing the weighting will change Match Score
   def score
     track_similarity = shared_count(:tracks) / (((@user1.tracks.uniq.count + @user2.tracks.uniq.count) - shared_count(:tracks)) * 1.0)
     artist_similarity = shared_count(:artists) / (((@user1.artists.uniq.count + @user2.artists.uniq.count) - shared_count(:artists)) * 1.0)
@@ -45,6 +47,7 @@ class Matcher
     score.round
   end
 
+  # Shows on the user profiles
   def sample(option, limit = 3)
     if option == :tracks
       names = shared(:tracks).map{ |item| item.name }
