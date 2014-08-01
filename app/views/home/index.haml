@@ -12,5 +12,11 @@
           %h3= user.match_with(current_user)
 -else
   .welcome
-    %h3 Welcome to Just Duet, a dating site with MUSIC
-    %h3= link_to "Sign in with Spotify", user_omniauth_authorize_url(:spotify), id: "sign-in-link"
+    .innerwelcome
+      %h3#welcometitle Welcome to Just Duet
+      %h3#byline a dating site
+      %br
+      %br
+      %br
+      %br
+      %h3#signuplink= link_to(image_tag("loginbutton.png",id:"loginbutton"), user_omniauth_authorize_url(:spotify), id: "sign-in-link")

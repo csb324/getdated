@@ -102,7 +102,26 @@ html, body {
 }
 
 .welcome {
-  // BRIAN PUTS STUFF HERE
+  position:relative;
+  .innerwelcome{
+    position:absolute; top:50%; height: 150px; margin-top:80px;
+    text-align: center;
+    width: 100%;
+    #welcometitle{
+      display:none;
+      font-size: 90px;
+      color: $spotify-green
+    }
+    #byline{
+      display:none;
+      font-size: 50px;
+    }
+    #loginbutton{
+      display:none;
+      width: 351px;
+      height: 65px;
+    }
+  }
 }
 
 #show-all-users {
