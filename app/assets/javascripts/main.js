@@ -29,7 +29,6 @@ GetDated = {
         console.log("success");
         $(".favbutton").empty();
         $(".favbutton").append('<h4>').append("Favorited!");
-
       })
       .fail(function(data) {
         console.log(data);
