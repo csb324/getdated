@@ -10,12 +10,24 @@ class Favorite < ActiveRecord::Base
     message: "You can only like them so much! " }
 
 
-  def other_user(me)
-    if fav_initiator == me
+  def other_user(current_user)
+    if fav_initiator == current_user
       fav_receiver
     else
       fav_initiator
     end
+  end
+
+  def unread_messages(current_user)
+    messages.select{ |msg| msg.read == false && msg.user != current_user}
+  end
+
+  def is_unread?(current_user)
+    unread_messages(current_user).length != 0
+  end
+
+  def most_recent_unread(current_user)
+    unread_messages(current_user).sort_by{ |msg| msg.created_at }.last
   end
 
 end
