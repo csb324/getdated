@@ -154,6 +154,10 @@ html, body {
     border-bottom: 2px solid $spotify-green;
     margin-bottom: 5px;
   }
+  .conversation-box {
+    overflow: auto;
+    max-height: 800px;
+  }
   .message {
     .message-body {
       font-size: 120%;
