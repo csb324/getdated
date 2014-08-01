@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def show
     if current_user != @user
+      # creates a match using a comparison spotify data for each user 
       @match = Matcher.new(current_user, @user)
     end
   end

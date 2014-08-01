@@ -19,6 +19,7 @@
   .small-6.columns
     .header
       %h2 Your messages with #{@mylove.display_name}
+      
     .conversation-box
       -@messages.each do |msg|
         .message{class: msg.message_class(current_user)}

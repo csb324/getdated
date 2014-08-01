@@ -25,6 +25,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
 
+  # what we pull from spotify OAuth
   def account_update_params
     params.require(:user).permit(:age, :gender, :display_name, :interested_in, :location, :bio, :email, :image, :remote_image_url)
   end

@@ -30,7 +30,6 @@ GetDated = {
         console.log("success");
         $(".favbutton").empty();
         $(".favbutton").append('<h4>').append("Favorited!");
-
       })
       .fail(function(data) {
         console.log(data);
@@ -62,6 +61,7 @@ GetDated = {
         $newmessage.append($('<div>').addClass("message-body").text($message));
         $newmessage.append($('<p>').addClass("message-info").text("Just now"));
         $convo.append($newmessage);
+        $convo.animate({ scrollTop: $convo.prop('scrollHeight')}, 400);
       })
       .fail(function(data) {
         console.log(data);
@@ -71,10 +71,12 @@ GetDated = {
       });
     });
 
+    // for the message form on favorite#show
     if($("#message-form").length !== 0){
       var $button = $("#message-form .button");
       var halfHeight = parseInt($button.css("height"))/2;
       $button.attr("style", "border-radius: " + halfHeight + "px;");
+      $(".conversation-box").scrollTop($('.conversation-box').prop('scrollHeight'));
     }
   }
 };

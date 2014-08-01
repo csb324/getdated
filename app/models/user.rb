@@ -113,6 +113,7 @@ class User < ActiveRecord::Base
     my_faves.shuffle[0...3]
   end
 
+  # called from Home#index
   def potential_matches
     potentials = []
     User.where(location: location).find_each do |user|
@@ -125,6 +126,7 @@ class User < ActiveRecord::Base
     potentials
   end
 
+  
   def favorite_exists?(other_user)
     if Favorite.find_by(fav_initiator: other_user, fav_receiver: self)
       true

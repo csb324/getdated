@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user
 
   respond_to :json
 
@@ -8,8 +7,10 @@ class MessagesController < ApplicationController
     @message = Message.new
   end
 
+  # Done with an Ajax call
   def create
     @message = Message.new(message_params)
+    # :favorite_id are pulled from form as data attr 
     @favorite = Favorite.find(params[:message][:favorite_id])
     @message.favorite = @favorite
     @message.user = current_user
@@ -22,9 +23,7 @@ class MessagesController < ApplicationController
   end
 
   private
-  def set_user
-    @user = current_user
-  end
+
   def message_params
     params.require(:message).permit(:msg, :favorite_id)
   end

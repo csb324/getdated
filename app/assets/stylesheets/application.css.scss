@@ -177,6 +177,10 @@ html, body {
     border-bottom: 2px solid $spotify-green;
     margin-bottom: 5px;
   }
+  .conversation-box {
+    overflow: auto;
+    max-height: 800px;
+  }
   .message {
     .message-body {
       font-size: 120%;
@@ -226,5 +230,36 @@ html, body {
 }
 
 .all-conversations {
-  // CLARA PUTS STUFF HERE
+  img {
+    width: 100%;
+  }
+  h3, p {
+    // margin-bottom: 0;
+  }
+  .profile-link {
+    text-align: right;
+  }
+  .navigation, h3 {
+    display: inline-block;
+  }
+  .navigation {
+    font-size: 20px;
+    a {
+      color: $spotify-green;
+    }
+  }
+  .new-message {
+    color: $dark-sand;
+    span {
+      font-style: italic;
+      font-size: 120%;
+    }
+    i {
+      position: relative;
+      bottom: 8px;
+    }
+  }
+  p.page-title {
+    border-bottom: 2px solid $spotify-green;
+  }
 }

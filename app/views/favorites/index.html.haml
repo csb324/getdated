@@ -1,15 +1,20 @@
 .row.all-conversations
-  .small-12.columns
-    %h2.page-title Your matches
-    %ul.large-block-grid-3
-      %table.centered
-        -@favorites.each do |favorite|
-          %tr
-            %td
-              %li= link_to(image_tag(favorite.other_user(current_user).image),
-                user_path(favorite.other_user(current_user)))
-            %td
-              %li= link_to('Message', favorite)
-              %h3= favorite.other_user(current_user).display_name
-              %span= favorite.other_user(current_user).age
+  %h2.page-title Your matches
+  %p.page-title These people liked you. You liked them back. This must be fate.
+  -@favorites.each do |favorite|
+    .small-6.columns.match-instance
+      .row
+        .small-6.columns
+          =image_tag(favorite.other_user(current_user).image)
+        .small-6.columns
+          .navigation
+            =link_to("Messages", favorite)
+            %span -
+            =link_to("Profile", user_path(favorite.other_user(current_user)))
+          =link_to user_path(favorite.other_user(current_user)) do
+            %h3= favorite.other_user(current_user).display_name
 
+          -if favorite.is_unread?(current_user)
+            .new-message
+              %i.fa-quote-left.fa
+              %span= favorite.most_recent_unread(current_user).msg
