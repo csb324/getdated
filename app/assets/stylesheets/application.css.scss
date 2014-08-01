@@ -154,12 +154,32 @@ html, body {
   .your-match.row {
     position: relative;
     border-bottom: 1px solid black;
+    p {
+      margin-bottom: 5px;
+    }
+    .artist-preferences {
+      p {
+        color: $spotify-green;
+        margin-top: 8px;
+      }
+      span {
+        padding: 0px 10px 0px 0px;
+      }
+    }
+  }
+
+  img {
+    vertical-align: top;
+  }
+
+  .user-info h3 {
+    display: inline-block;
   }
 
   .small-10.columns {
     position: relative;
     padding-bottom: 8px;
-
+    left: 50px;
   }
 
   .small-2.columns h3 {
@@ -176,9 +196,25 @@ html, body {
 .edit-profile {
   // ERIC PUTS STUFF HERE
 
+  .medium-4.columns {
+    .controls {
+      max-width: 100px;
+    }
+    #location {
+      max-width: 200px;
+    }
+    #bio {
+      max-width: 300px;
+    }
+    #user_bio {
+      height: 150px;
+    }
+  }
+
   .medium-8.columns {
     img {
-      height: 250px;
+      height: 275px;
+      border: 1px solid black;
     }
     .medium-9.columns {
       margin-top: 12px;
@@ -191,7 +227,47 @@ html, body {
   .submit-button {
     margin-top: 10px;
     left: 30px;
+    background-color: $spotify-green;
   }
+
+}
+
+#add-email {
+
+  .medium-4.columns {
+    .controls {
+      max-width: 100px;
+    }
+    #location {
+      max-width: 200px;
+    }
+    #bio {
+      max-width: 300px;
+    }
+    #user_bio {
+      height: 150px;
+    }
+  }
+
+  .medium-8.columns {
+    img {
+      height: 275px;
+      border: 1px solid black;
+    }
+    .medium-9.columns {
+      margin-top: 12px;
+      h4 {
+        margin-top: -10px;
+      }
+    }
+  }
+
+  .submit-button {
+    margin-top: 10px;
+    left: 30px;
+    background-color: $spotify-green;
+  }
+
 
 }
 

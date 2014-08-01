@@ -8,8 +8,13 @@
           .user-info
             %h3= link_to user.display_name, user_path(user)
             %span #{user.age}, #{user.location.capitalize}
+            .artist-preferences
+              %p ARTISTS THEY LIKE
+              -user.favorite_music(:artists).each do |artist|
+                %span #{artist}
         .small-2.columns
           %h3= user.match_with(current_user)
+
 -else
   .welcome
     .innerwelcome

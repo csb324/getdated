@@ -1,5 +1,5 @@
 Matches = {
   stuff: function() {
-    $("#show-all-users").fadeIn(800);
+    $("#show-all-users").fadeIn(400);
   }
 };
