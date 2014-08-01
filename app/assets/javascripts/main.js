@@ -74,6 +74,5 @@ GetDated = {
       var halfHeight = parseInt($button.css("height"))/2;
       $button.attr("style", "border-radius: " + halfHeight + "px;");
     }
-
   }
 };
