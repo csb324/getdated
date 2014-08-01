@@ -2,40 +2,37 @@
   .medium-8.columns
     %img.profpic{src: @user.image.url(:square_100)}
     .top-info
-      %h3.user-name= @user.display_name
+      %h2.user-name= @user.display_name
       .favbutton
-        -if !current_user== @user && !current_user.favorite_exists?(@user)
-          %a#favorite.button{"data-target" => "#{@user.id}"} Favorite Me
-        -else
-          -if !current_user == @user
-            %h6#liked You favorited this person!
+        -if current_user != @user
+          -if !@user.favorite_exists?(current_user)
+            %a#favorite.button{"data-target" => "#{@user.id}"} Favorite Me
           -else
-            %h6 you're awful pretty
+            %h6#liked You favorited this person!
+    %br
+    %br
+    %br
     .bio-info
-      %h4#bioheader About #{@user.display_name}
+      %h4.section-title About #{@user.display_name}
       %p #{@user.age} years old and from #{@user.location.capitalize}
       %p I'm a #{@user.gender.capitalize} looking for #{@user.interested_in.capitalize}s
-      %h4 Bio
+      %h4.section-title Bio
       %p= @user.bio
   -if @user != current_user
-    -if !current_user.favorite_exists?(@user)
-      = form_tag(favorites_path, method: 'post') do
-        = hidden_field_tag :target_id, @user.id
-        = submit_tag "favorite", class: 'button'
     .medium-4.columns.match-info
-      %h3.score score: #{@match.score}
+      %h3.sheader score: #{@match.score}
       .shared-artists
-        %h3 shared artists
+        %h3.sheader shared artists
         %ul
           -@match.sample(:artists).each do |artist|
             %li= artist
       .shared-genres
-        %h3 shared genres
+        %h3.sheader shared genres
         %ul
           -@match.sample(:genres).each do |genre|
             %li= genre
       .shared-tracks
-        %h3 shared tracks
+        %h3.sheader shared tracks
         %ul
           -@match.sample(:tracks).each do |track|
             %li= track
