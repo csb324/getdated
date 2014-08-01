@@ -1,22 +1,23 @@
-.controls
-  = f.label :age
-  = f.text_field :age, value: current_user.age, min: '18', max:'100', required: ''
-  = f.label :gender
-.controls
-  = f.select :gender, [['Female','female'], ['Male', 'male']]
-  = f.label :interested_in
-.controls
-  = f.select :interested_in, [['Male', 'male'], ['Female','female'], ['Both', 'both']]
-  = f.label :location
-.controls
-  = f.select :location, User::CITIES
-  = f.label :bio
-.controls
-  = f.text_area :bio, value: current_user.bio, placeholder:'Tell us about yourself! ', required: ''
-.controls.row
-  .medium-3.column
+.medium-4.columns
+  .controls#age
+    = f.label :age
+    = f.text_field :age, value: current_user.age, min: '18', max:'100', required: ''
+    = f.label :gender
+  .controls#gender
+    = f.select :gender, [['Female','female'], ['Male', 'male']]
+    = f.label :interested_in
+  .controls#int-gender
+    = f.select :interested_in, [['Male', 'male'], ['Female','female'], ['Both', 'both']]
+    = f.label :location
+  .controls#location
+    = f.select :location, User::CITIES
+    = f.label :bio
+  .controls#bio
+    = f.text_area :bio, value: current_user.bio, placeholder:'Tell us about yourself! ', required: ''
+.medium-8.columns
+  .controls.row
     = image_tag(user.image_url)
-  .medium-9.column
+  .medium-9.columns
     = f.file_field :image
     %h4 or
-    = f.text_field :remote_image_url
+    = f.text_field  :remote_image_url, placeholder: "Image URL"

@@ -5,6 +5,7 @@ $(document).on('ready page:change', function(){
     $("#email-input").val('');
   }
   console.log("document was ready");
+  Matches.stuff();
   GetDated.init();
   Effects.dothem();
 
