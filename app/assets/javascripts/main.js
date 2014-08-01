@@ -4,7 +4,7 @@ $(document).on('ready page:change', function(){
   if ($("#email-input").val() === "12324857203948572304857230948750923847509283475@example.com"){
     $("#email-input").val('');
   }
-  console.log("document was ready")
+  console.log("document was ready");
   GetDated.init();
   Effects.dothem();
 
