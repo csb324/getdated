@@ -98,7 +98,22 @@ html, body {
 }
 
 .user-profile {
-  // BRIAN PUTS STUFF HERE
+  display:none;
+  .profpic{
+    border: 2px solid black;
+  }
+  text-align: center;
+  h4{
+    background: $spotify-sand;
+  }
+  .match-info{
+    border: 2px solid black;
+    h3{
+      background:black;
+      color: $spotify-sand;
+    }
+  }
+
 }
 
 .welcome {
