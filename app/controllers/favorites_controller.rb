@@ -1,22 +1,25 @@
 class FavoritesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user
 
   respond_to :json
 
   def index
     @target_users = []
     # favourited users associated with current user when mutually liked
-    @favorites = Favorite.where(fav_initiator: @user, liked_back: true)
-    @favorites += Favorite.where(fav_receiver: @user, liked_back: true)
+    @favorites = Favorite.where(fav_initiator: current_user, liked_back: true)
+    @favorites += Favorite.where(fav_receiver: current_user, liked_back: true)
   end
 
   def show
+    # Also shows all messages between matched users
     @favorite = Favorite.find(params[:id])
     @messages = Message.where(favorite: @favorite).sort()
+    # gets the user who is not current user in the match
     @mylove = @favorite.other_user(current_user)
     @match = Matcher.new(current_user, @mylove)
 
+    # Marks messages as read or unread so they get notifications in 
+    # the nav bar 
     @messages.each do |msg|
       if msg.user != current_user
         msg.read = true
@@ -31,15 +34,18 @@ class FavoritesController < ApplicationController
     @favorite = Favorite.find_by(fav_initiator: @target, fav_receiver: current_user)
 
     if @favorite
+      # sends a message if both users like each other
       @favorite.liked_back = true
       @message = Message.new(user: current_user)
       @message.favorite = @favorite
       @message.msg = "Congratulations! It's a match!"
       @message.save
     else
+      # otherwise it initiates a favorite
       @favorite = Favorite.new(fav_initiator: current_user, fav_receiver: @target)
     end
 
+    # for Ajax post responses
     if @favorite.save
       respond_with(@favorite)
     else
@@ -48,11 +54,7 @@ class FavoritesController < ApplicationController
   end
 
   private
-
-  def set_user
-    @user = current_user
-  end
-
+  # LEFT SIDE -- STRONG SIDE .. params
   def favorite_params
     params.require(:favorite).permit(:fav_initiator, :fav_receiver)
   end

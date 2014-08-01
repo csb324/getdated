@@ -70,6 +70,7 @@ GetDated = {
       });
     });
 
+    // for the message form on favorite#show
     if($("#message-form").length !== 0){
       var $button = $("#message-form .button");
       var halfHeight = parseInt($button.css("height"))/2;
