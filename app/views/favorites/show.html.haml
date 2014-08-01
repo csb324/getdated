@@ -1,16 +1,46 @@
 .row.single-conversation
   .small-3.columns
     %img.profile-picture{src:current_user.image}
+    .music-info
+      %h4 Music you have in common
+      %p.category Artists
+      %ul
+        -@match.sample(:artists).each do |artist|
+          %li= artist
+      %p.category Tracks
+      %ul
+        -@match.sample(:tracks).each do |track|
+          %li= track
+      %p.category Genres
+      %ul
+        -@match.sample(:genres).each do |genre|
+          %li= genre
+
   .small-6.columns
     .header
-      %h2 Your messages with #{@favorite.other_user(current_user).display_name}
-    -@messages.each do |msg|
-      .message{class: msg.message_class(current_user)}
-        .message-body= msg.msg
-        %p.message-info #{time_ago_in_words(msg.created_at)} ago
+      %h2 Your messages with #{@mylove.display_name}
+    .conversation-box
+      -@messages.each do |msg|
+        .message{class: msg.message_class(current_user)}
+          .message-body= msg.msg
+          %p.message-info #{time_ago_in_words(msg.created_at)} ago
 
     %form#message-form{"data-favorite_id" => @favorite.id}
       %input#message{type: "text"}
-      %input{type: "submit"}
+      %input.button{type: "submit"}
+
+
   .small-3.columns
     %img.profile-picture{src:@favorite.other_user(current_user).image}
+    .music-info
+      %h4 Music #{@mylove.display_name} likes
+      %p.category Artists
+      %ul
+        -@mylove.favorite_music(:artists).each do |artist|
+          %li= artist
+      %p.category Genres
+      %ul
+        -@mylove.favorite_music(:genres).each do |genre|
+          %li= genre
+      %p.category.score similarity score:
+      %p.score= @match.score

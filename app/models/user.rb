@@ -108,9 +108,9 @@ class User < ActiveRecord::Base
     my_faves = []
     freq_descending = frequencies_of(option).sort_by{ |item, count| count }.reverse
     freq_descending[0...5].each do |fav|
-      my_faves << fav[0]
+      my_faves << fav[0].name
     end
-    my_faves.shuffle
+    my_faves.shuffle[0...3]
   end
 
   def potential_matches

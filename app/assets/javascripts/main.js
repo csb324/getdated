@@ -47,6 +47,8 @@ GetDated = {
       $("#message").val("");
       var $favid = $("#message-form").data("favorite_id");
 
+      var $convo = $(".conversation-box");
+
       $.ajax({
         url: Routes.messages_path(),
         type: 'POST',
@@ -54,7 +56,10 @@ GetDated = {
         data: {message: {msg:$message, favorite_id:$favid}},
       })
       .done(function() {
-        $("#messages").append($("<tr>")).append($("<h5>").text($message));
+        var $newmessage = $('<div>').addClass("message sent");
+        $newmessage.append($('<div>').addClass("message-body").text($message));
+        $newmessage.append($('<p>').addClass("message-info").text("Just now"));
+        $convo.append($newmessage);
       })
       .fail(function(data) {
         console.log(data);
@@ -62,7 +67,12 @@ GetDated = {
       .always(function() {
         console.log("complete");
       });
-
     });
+
+    if($("#message-form").length !== 0){
+      var $button = $("#message-form .button");
+      var halfHeight = parseInt($button.css("height"))/2;
+      $button.attr("style", "border-radius: " + halfHeight + "px;");
+    }
   }
 };
