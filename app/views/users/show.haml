@@ -38,4 +38,14 @@
             %li= track
   -if @user == current_user
     = link_to "edit your profile", edit_user_registration_path, class: 'button'
+    %h4.yourfave Your favorite music
+    .your-music
+      %p.category Artists
+      %ul
+        -@user.favorite_music(:artists).each do |artist|
+          %li= artist
+      %p.category Genres
+      %ul
+        -@user.favorite_music(:genres).each do |genre|
+          %li= genre
 

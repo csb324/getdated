@@ -5,6 +5,6 @@ Effects = {
     setTimeout('$("#byline").fadeIn(900)',450);
     setTimeout('$("#loginbutton").fadeIn(900)',900);
 
-    $(".user-profile").fadeIn(900);
+    $(".user-profile").fadeIn(400);
   }
 };

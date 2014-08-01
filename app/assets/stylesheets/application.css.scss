@@ -107,11 +107,23 @@ html, body {
   h4{
     background: $spotify-sand;
   }
+  .yourfave {
+    background: none;
+    border-bottom: 2px solid $spotify-green;
+  }
   .match-info{
     border: 2px solid black;
     h3{
       background:black;
       color: $spotify-sand;
+    }
+  }
+  .your-music {
+    text-align: left;
+    .category {
+      color: $spotify-green;
+      text-transform: uppercase;
+      margin-bottom: 0;
     }
   }
 
@@ -362,4 +374,8 @@ html, body {
   p.page-title {
     border-bottom: 2px solid $spotify-green;
   }
+}
+
+.button {
+  background: $spotify-green;
 }
