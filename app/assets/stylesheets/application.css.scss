@@ -19,6 +19,7 @@
 $spotify-green: #75C92B;
 $spotify-sand: #ECEBE8;
 $light-green: #DAE6CC;
+$dark-sand: #B9B3AF;
 $slab: 'Bitter', serif;
 $sans: 'Raleway', sans-serif;
 
@@ -120,10 +121,50 @@ html, body {
     margin-bottom: 5px;
   }
   .message {
+    .message-body {
+      font-size: 120%;
+    }
+    .message-info {
+      color: $dark-sand;
+    }
+    &.received {
+      text-align: right;
+    }
   }
   .profile-picture {
     border-radius: 100%;
     border: none;
+    max-width: 200px;
+    text-align: center;
+  }
+  .music-info {
+    h4 {
+      border-bottom: 1px solid $dark-sand;
+    }
+    .category {
+      color: $spotify-green;
+      text-transform: uppercase;
+      font-size: 90%;
+      &.score {
+        font-size: 20px;
+      }
+    }
+    .score {
+      font-size: 38px;
+      line-height: 105%;
+    }
+    p {
+      margin-bottom: 0;
+    }
+    ul {
+      margin-left: 0;
+    }
+  }
+  #message-form {
+    text-align: center;
+  }
+  .button {
+    background: $spotify-green;
   }
 }
 

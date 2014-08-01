@@ -30,7 +30,7 @@ class Matcher
     by_freq.sort_by{ |item, count| count }.reverse
   end
 
-  def top_shared(option, limit = 3)
+  def top_shared(option, limit = 5)
     shared_by_frequency(option)[0...limit]
   end
 
@@ -45,14 +45,14 @@ class Matcher
     score.round
   end
 
-  def sample(option)
+  def sample(option, limit = 3)
     if option == :tracks
       names = shared(:tracks).map{ |item| item.name }
       names.shuffle
-      names[0...3]
+      names[0...limit]
     else
-      names = top_shared(option).map { |item| item[0].name }
-      names.shuffle
+      names = top_shared(option, (limit + 2)).map { |item| item[0].name }
+      names.shuffle[0...limit]
     end
   end
 

@@ -14,12 +14,16 @@ class FavoritesController < ApplicationController
   def show
     @favorite = Favorite.find(params[:id])
     @messages = Message.where(favorite: @favorite).sort()
+    @mylove = @favorite.other_user(current_user)
+    @match = Matcher.new(current_user, @mylove)
+
     @messages.each do |msg|
       if msg.user != current_user
         msg.read = true
         msg.save
       end
     end
+
   end
 
   def create
