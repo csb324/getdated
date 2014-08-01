@@ -64,7 +64,7 @@ html, body {
     padding-top: 10px;
     position: relative;
     background: white;
-    min-height: 80%;
+    min-height: 100%;
   }
 }
 
@@ -144,31 +144,55 @@ html, body {
   // ERIC PUTS STUFF HERE
 
   display: none;
-
-  .your-match-row {
-    display: none;
-  }
+  position: relative;
 
   .page-title {
-    color: $spotify-green;
-    border-bottom: 2px solid black;
-  }
+      color: $spotify-green;
+      border-bottom: 3px solid black;
+    }
 
-  .small-10.columns {
-    padding-bottom: 8px;
+  .your-match.row {
+    position: relative;
     border-bottom: 1px solid black;
   }
 
+  .small-10.columns {
+    position: relative;
+    padding-bottom: 8px;
+
+  }
+
   .small-2.columns h3 {
-    float: bottom;
+    position: absolute;
+    top: 25px;
     font-weight: bold;
     color: $spotify-green;
+    font-size: 30px;
+    font-family: $slab;
   }
 
 }
 
 .edit-profile {
   // ERIC PUTS STUFF HERE
+
+  .medium-8.columns {
+    img {
+      height: 250px;
+    }
+    .medium-9.columns {
+      margin-top: 12px;
+      h4 {
+        margin-top: -10px;
+      }
+    }
+  }
+
+  .submit-button {
+    margin-top: 10px;
+    left: 30px;
+  }
+
 }
 
 .single-conversation {
