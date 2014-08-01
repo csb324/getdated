@@ -107,6 +107,14 @@ html, body {
 
 #show-all-users {
   // ERIC PUTS STUFF HERE
+  h2 {
+    border-bottom: 2px solid $spotify-green;
+  }
+
+  .small-10.columns {
+    padding-bottom: 8px;
+    border-bottom: 1px solid $spotify-sand;
+  }
 }
 
 .edit-profile {

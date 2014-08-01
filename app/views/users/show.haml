@@ -4,7 +4,8 @@
     .top-info
       %h3.user-name= @user.display_name
       .favbutton
-        %a#favorite.button{"data-target" => "#{@user.id}"} Favorite Me
+        -if @user != current_user
+          %a#favorite.button{"data-target" => "#{@user.id}"} Favorite Me
     .bio-info
       %h4 About #{@user.display_name}
       %p #{@user.age}, #{@user.location.capitalize}
