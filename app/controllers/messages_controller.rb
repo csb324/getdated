@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
   # Done with an Ajax call
   def create
     @message = Message.new(message_params)
-    # :favorite_id are pulled from form as data attr 
+    # :favorite_id are pulled from form as data attr
     @favorite = Favorite.find(params[:message][:favorite_id])
     @message.favorite = @favorite
     @message.user = current_user
