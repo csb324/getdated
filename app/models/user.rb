@@ -126,7 +126,7 @@ class User < ActiveRecord::Base
     potentials
   end
 
-  
+
   def favorite_exists?(other_user)
     if Favorite.find_by(fav_initiator: other_user, fav_receiver: self)
       true

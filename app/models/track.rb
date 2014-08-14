@@ -11,7 +11,7 @@ class Track < ActiveRecord::Base
     @user = User.find_by(uid: current_user.uid)
     @auth_token = "Bearer #{credentials.token}"
 
-    # Get the tracks! 
+    # Get the tracks!
     playlists_json_string = RestClient::Request.execute(
       :method => :get,
       :url => "https://api.spotify.com/v1/users/#{current_user.uid}/playlists",
@@ -55,7 +55,7 @@ class Track < ActiveRecord::Base
 
     new_tracks = all_tracks_info.select { |track| new_ids.include?(track['id']) }
 
-    # Add all the new tracks to the database! 
+    # Add all the new tracks to the database!
     new_tracks.uniq.each do |newtrack|
       @track = Track.new(
         spotify_id: newtrack['id'],

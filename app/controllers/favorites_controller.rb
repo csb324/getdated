@@ -6,20 +6,29 @@ class FavoritesController < ApplicationController
   def index
     @target_users = []
     # favourited users associated with current user when mutually liked
-    @favorites = Favorite.where(fav_initiator: current_user, liked_back: true)
-    @favorites += Favorite.where(fav_receiver: current_user, liked_back: true)
+    # @favorites = Favorite.where(fav_initiator: current_user, liked_back: true)
+    # @favorites += Favorite.where(fav_receiver: current_user, liked_back: true)
+    @favorites = Favorite
+      .where(fav_initiator: current_user, liked_back: true)
+      .includes(:fav_initiator)
+    @favorites += Favorite
+      .where(fav_initiator: current_user, liked_back: true)
+      .includes(:fav_receiver)
   end
 
   def show
     # Also shows all messages between matched users
     @favorite = Favorite.find(params[:id])
-    @messages = Message.where(favorite: @favorite).sort()
+    # @messages = Message.where(favorite: @favorite).sort()
+    @messages = Message.includes(:user).where(favorite: @favorite).sort()
     # gets the user who is not current user in the match
     @mylove = @favorite.other_user(current_user)
-    @match = Matcher.new(current_user, @mylove)
+    @match = Rails.cache.fetch([self, @mylove, ], expires_in: 15.minutes) do
+      Matcher.new(current_user, @mylove)
+    end
 
-    # Marks messages as read or unread so they get notifications in 
-    # the nav bar 
+    # Marks messages as read or unread so they get notifications in
+    # the nav bar
     @messages.each do |msg|
       if msg.user != current_user
         msg.read = true
@@ -31,7 +40,8 @@ class FavoritesController < ApplicationController
 
   def create
     @target = User.find(favorite_params[:fav_receiver])
-    @favorite = Favorite.find_by(fav_initiator: @target, fav_receiver: current_user)
+    @favorite = Favorite
+      .find_by(fav_initiator: @target, fav_receiver: current_user)
 
     if @favorite
       # sends a message if both users like each other
@@ -42,7 +52,8 @@ class FavoritesController < ApplicationController
       @message.save
     else
       # otherwise it initiates a favorite
-      @favorite = Favorite.new(fav_initiator: current_user, fav_receiver: @target)
+      @favorite = Favorite
+        .new(fav_initiator: current_user, fav_receiver: @target)
     end
 
     # for Ajax post responses

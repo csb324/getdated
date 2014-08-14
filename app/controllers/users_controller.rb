@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def show
     if current_user != @user
-      # creates a match using a comparison spotify data for each user 
+      # creates a match using a comparison spotify data for each user
       @match = Matcher.new(current_user, @user)
     end
   end
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email,:uid,:remote_image_url,:image,:name,:age,:gender,:interested_in,:display_name,:location,:bio)
+    params.require(:user)
+    .permit(:email,:uid,:remote_image_url,:image,:name,:age,:gender,:interested_in,:display_name,:location,:bio)
   end
-
 end

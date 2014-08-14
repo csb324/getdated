@@ -39,6 +39,10 @@ gem 'js-routes'
 # Active Model Serializer
 gem 'active_model_serializers'
 
+gem 'rack-mini-profiler'
+
+gem 'bullet', group: :development
+
 # Add testing for rails and dev
 group :development, :test do
   gem 'factory_girl_rails'
